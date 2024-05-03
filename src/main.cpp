@@ -1,6 +1,7 @@
 #include <iostream>
+#include <QGuiApplication>
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    std::cout << "CMake application" << std::endl;
     return 0;
 }
