@@ -1,12 +1,22 @@
-import QtQuick 2.0
+import QtQuick 2.15
+import QtQuick.Controls 2.15
 
-Rectangle {
+ApplicationWindow {
+    visible: true
     width: 360
     height: 360
-    Text {
-        text: "Hello, World!"
-        anchors.centerIn: parent
+    title: "File Browser"
+
+    ListView{
+        model: pcdata
+        anchors.fill: parent
+        delegate: Text {
+            text: modelData
+            font.pixelSize: 20
+            color: "black"
+        }
     }
+
     MouseArea {
         anchors.fill: parent
         onClicked: {
