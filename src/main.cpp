@@ -1,7 +1,9 @@
-#include <iostream>
-#include <QGuiApplication>
+#include <QApplication>
+#include <QLabel>
 
-int main() {
-    std::cout << "CMake application" << std::endl;
-    return 0;
+int main(int argc, char **argv) {
+    QApplication app(argc, argv);
+    QLabel label("Toby application");
+    label.show();
+    return app.exec();
 }
