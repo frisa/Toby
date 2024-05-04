@@ -4,6 +4,7 @@
 #include <QIcon>
 #include "pcinfo.h"
 #include "logic.h"
+#include "logger.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,8 +16,10 @@ int main(int argc, char *argv[])
 
     PCInfo pcinfo;
     Logic logic;
+    Logger logger;
     engine.rootContext()->setContextProperty("pcinfo", &pcinfo);
     engine.rootContext()->setContextProperty("logic", &logic);
+    engine.rootContext()->setContextProperty("logger", &logger);
 
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     engine.load(url);

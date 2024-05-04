@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.15
 ApplicationWindow {
     visible: true
     width: 320
-    height: 170
+    height: 500
     title: "Toby's App"
     ColumnLayout {
         anchors.fill: parent
@@ -66,15 +66,24 @@ ApplicationWindow {
                 logic.parameter1 = paramField1.text;
                 logic.parameter2 = paramField2.text;
                 logic.number1 = numberField1.value;
-                console.log("Set Paramter 2 " + logic.parameter2);
-                console.log("Set Paramter 1: " + logic.parameter1);
-                console.log("Set Paramter 2 " + logic.number1);
+                logger.log = "Set Paramter 2 " + logic.parameter2;
+                logger.log = "Set Paramter 1: " + logic.parameter1;
+                logger.log = "Set Paramter 2 " + logic.number1;
             }
             Layout.fillWidth: true
         }
 
-        Label {
-            text: "Parameters " + logic.parameter1 + " " + logic.parameter2
+        ListView{
+            model: logger
+            delegate: Text {
+                text: messages
+                color: "yellow"
+            }
+        
+        }
+
+        Text {
+            text: logger.log
             color: "white"
         }
     }

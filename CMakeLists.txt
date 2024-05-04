@@ -20,6 +20,8 @@ set(PROJECT_SOURCES
     inc/logic.h
     src/pcinfo.cpp
     inc/pcinfo.h
+    src/logger.cpp
+    inc/logger.h
     resources/resources.qrc
     )
 
