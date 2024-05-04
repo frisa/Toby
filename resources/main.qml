@@ -45,15 +45,30 @@ ApplicationWindow {
                 Layout.fillWidth: true
             }
         }
+        RowLayout {
+            Text {
+                text: "Number 1:  "
+                color: "white"
+            }
+            SpinBox {
+                id: numberField1
+                from: 0
+                to: 100
+                value: logic.number1
+                Layout.fillWidth: true
+            }
+        }
 
         Button {
             text: "Submit"
             width: parent.width
             onClicked: {
                 logic.parameter1 = paramField1.text;
-                console.log("Set Paramter 1: " + paramField1.text);
                 logic.parameter2 = paramField2.text;
-                console.log("Set Paramter 2 " + paramField2.text);
+                logic.number1 = numberField1.value;
+                console.log("Set Paramter 2 " + logic.parameter2);
+                console.log("Set Paramter 1: " + logic.parameter1);
+                console.log("Set Paramter 2 " + logic.number1);
             }
             Layout.fillWidth: true
         }
