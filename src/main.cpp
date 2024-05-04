@@ -1,13 +1,16 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QIcon>
 #include <pcdata.h>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    QQmlApplicationEngine engine;
+    app.setApplicationName("PCData Example");
+    app.setWindowIcon(QIcon(":/img/world.png"));
 
+    QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     engine.load(url);
 

@@ -7,20 +7,15 @@ ApplicationWindow {
     height: 360
     title: "File Browser"
 
-    Image {
-        anchors.fill: parent
-        source: "qrc:/img/world.png"
-    }
-    /*
     ListView{
         model: pcdata
         anchors.fill: parent
         delegate: Text {
             text: modelData
             font.pixelSize: 20
-            color: "black"
+            color: "white"
         }
-    }*/
+    }
 
     MouseArea {
         anchors.fill: parent
