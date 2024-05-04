@@ -12,12 +12,13 @@ int main(int argc, char *argv[])
     app.setWindowIcon(QIcon(":/img/world.png"));
 
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
-    engine.load(url);
 
     PCInfo pcinfo;
-    engine.rootContext()->setContextProperty("pcinfo", &pcinfo);
     Logic logic;
+    engine.rootContext()->setContextProperty("pcinfo", &pcinfo);
     engine.rootContext()->setContextProperty("logic", &logic);
+
+    const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
+    engine.load(url);
     return app.exec();
 }

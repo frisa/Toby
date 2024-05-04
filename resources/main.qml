@@ -4,26 +4,24 @@ import QtQuick.Layouts 1.15
 
 ApplicationWindow {
     visible: true
-    width: 250
-    height: 300
+    width: 320
+    height: 170
     title: "Toby's App"
     ColumnLayout {
         anchors.fill: parent
-        Label {
-            horizontalAlignment: Text.AlignHCenter
-            text: pcinfo.hostname
-            color: "white"
-            background: 
-                Rectangle {
-                    color: "gray"
-                    border.color: "white"
-                    radius: 1
-                }
-            Layout.fillWidth: true
+        spacing: 10
+        RowLayout {
+            Label {
+                text: "Hostname:  "
+                color: "white"
+            }
+            TextField {
+                id: hostNameField
+                text: pcinfo.hostname
+                Layout.fillWidth: true
+            }
         }
         RowLayout {
-            height: 30
-            width: parent.width
             Label {
                 text: "Parameter 1:  "
                 color: "white"
@@ -36,8 +34,6 @@ ApplicationWindow {
             }
         }
         RowLayout {
-            height: 30
-            width: parent.width
             Text {
                 text: "Parameter 2:  "
                 color: "white"
