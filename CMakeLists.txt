@@ -16,8 +16,8 @@ set(CMAKE_AUTOUIC ON)
 
 set(PROJECT_SOURCES
     src/main.cpp
-    src/pcdata.cpp
-    inc/pcdata.h
+    src/logic.cpp
+    inc/logic.h
     src/pcinfo.cpp
     inc/pcinfo.h
     resources/resources.qrc

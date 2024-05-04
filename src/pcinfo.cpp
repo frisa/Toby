@@ -16,4 +16,4 @@ PCInfo::PCInfo(QObject *parent)
 {
 }
 
-#include "pcinfo.moc"
+//#include "pcinfo.moc"
