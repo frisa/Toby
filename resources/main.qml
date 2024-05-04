@@ -39,9 +39,16 @@ ApplicationWindow {
         Button {
             text: "Submit"
             onClicked: {
-                console.log("Paramter 1: " + paramField1.text);
-                console.log("Paramter 2 " + paramField2.text);
+                logic.parameter1 = paramField1.text;
+                console.log("Set Paramter 1: " + paramField1.text);
+                logic.parameter2 = paramField2.text;
+                console.log("Set Paramter 2 " + paramField2.text);
             }
+        }
+
+        Label {
+            text: "Parameters " + logic.parameter1 + " " + logic.parameter2
+            color: "white"
         }
     }
 }

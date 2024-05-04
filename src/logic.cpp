@@ -24,8 +24,8 @@ void Logic::setParameter2(const QString &value)
 
 Logic::Logic(QObject *parent)
 {
-    m_parameter1 = "Hello 1 from Logic!";
-    m_parameter2 = "Hello 2 from Logic!";
+    m_parameter1 = "value 1";
+    m_parameter2 = "value 2";
 }
 
 //#include "logic.moc"
