@@ -1,11 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
-project(toby)
+set(EXECUTABLE_NAME "toby")
+project(${EXECUTABLE_NAME})
 
-IF(APPLE)
-    set(CMAKE_PREFIX_PATH "/Users/jan/Qt/6.5.0/macos/lib/cmake/Qt6")
-ELSE()
-    set(CMAKE_PREFIX_PATH "/home/frid/Qt/6.6.2/gcc_64")
-ENDIF()
+set(CMAKE_PREFIX_PATH "/Users/jan/Qt/6.5.0/macos/lib/cmake/Qt6")
 
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Gui)
@@ -16,24 +13,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+set(PROJECT_SOURCES
+    src/main.cpp
+    src/pcdata.cpp
+    inc/pcdata.h
+    resources/resources.qrc
+    )
 
 qt_standard_project_setup(REQUIRES 6.5)
 
-qt6_add_executable(${PROJECT_NAME})
+qt6_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
-qt6_add_qml_module(${PROJECT_NAME}
-    URI mainwindow
-    VERSION 1.0
-    QML_FILES 
-        ./qml/main.qml)
-
-target_sources(${PROJECT_NAME} 
-    PRIVATE
-        ./src/main.cpp
-        ./src/pcdata.cpp
-        ./inc/pcdata.h
-    )
+target_compile_definitions(${PROJECT_NAME}
+        PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
 target_include_directories(${PROJECT_NAME} 
     PRIVATE

@@ -13,7 +13,7 @@
             "macFrameworkPath": [
                 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
             ],
-            "configurationProvider": "ms-vscode.cmake-tools"
+            //"configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
     "version": 4
