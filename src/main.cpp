@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QIcon>
-#include <pcdata.h>
+#include "pcinfo.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     engine.load(url);
 
-    PCData pcdata;
-    engine.rootContext()->setContextProperty("pcdata", &pcdata);
+    PCInfo pcinfo;
+    engine.rootContext()->setContextProperty("pcinfo", &pcinfo);
     return app.exec();
 }

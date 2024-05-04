@@ -7,16 +7,11 @@ ApplicationWindow {
     height: 360
     title: "File Browser"
 
-    ListView{
-        model: pcdata
-        anchors.fill: parent
-        delegate: Text {
-            text: modelData
-            font.pixelSize: 20
-            color: "white"
-        }
+    Label
+    {
+        text: pcinfo.hostname
+        anchors.centerIn: parent
     }
-
     MouseArea {
         anchors.fill: parent
         onClicked: {

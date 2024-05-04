@@ -18,6 +18,8 @@ set(PROJECT_SOURCES
     src/main.cpp
     src/pcdata.cpp
     inc/pcdata.h
+    src/pcinfo.cpp
+    inc/pcinfo.h
     resources/resources.qrc
     )
 
