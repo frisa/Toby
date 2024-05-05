@@ -4,8 +4,8 @@ import QtQuick.Layouts 1.15
 
 ApplicationWindow {
     visible: true
-    width: 640
-    height: 480
+    width: 720
+    height: 520
     title: "Toby's App"
     menuBar: MenuBar {
         Menu {

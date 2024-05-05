@@ -54,4 +54,40 @@ GridLayout {
         }
         Layout.fillWidth: true
     }
+    Label {
+        text: "Latitude:"
+    }
+    TextField {
+        id: latitudeField
+        text: "47.410967"
+        validator: DoubleValidator {
+            bottom: -90.0
+            top: 90.0
+            decimals: 6
+        }
+        Layout.fillWidth: true
+    }
+    Label {
+        text: "Longitude:"
+    }
+    TextField {
+        id: lonbitudeField
+        text: "9.6271219"
+        validator: DoubleValidator {
+            bottom: -90.0
+            top: 90.0
+            decimals: 6
+        }
+        Layout.fillWidth: true
+    }
+    Button {
+        text: "Find"
+        width: parent.width
+        Layout.columnSpan: 2
+        onClicked: {
+            logic.number1 = latitudeField.value;
+            logic.number2 = longitudeField.value;
+        }
+        Layout.fillWidth: true
+    }
 }
