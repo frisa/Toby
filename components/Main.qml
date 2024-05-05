@@ -47,9 +47,7 @@ ApplicationWindow {
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: Loader {
-            anchors.fill: parent
-            source: "Form.qml"
+        initialItem: Sensor {
         }
     }
 }

@@ -2,61 +2,48 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
-ColumnLayout {
-    anchors.fill: parent
-    spacing: 10
-    RowLayout {
-        Label {
-            text: "Hostname:  "
-            color: "white"
-        }
-        TextField {
-            id: hostNameField
-            text: pcinfo.hostname
-            Layout.fillWidth: true
-        }
+GridLayout {
+    columns: 2
+    Label {
+        text: "Hostname:"
     }
-    RowLayout {
-        Label {
-            text: "Parameter 1:  "
-            color: "white"
-        }
-        TextField {
-            id: paramField1
-            placeholderText: "Enter first parameter"
-            text: logic.parameter1
-            Layout.fillWidth: true
-        }
+    TextField {
+        id: hostNameField
+        text: pcinfo.hostname
+        Layout.fillWidth: true
     }
-    RowLayout {
-        Text {
-            text: "Parameter 2:  "
-            color: "white"
-        }
-        TextField {
-            id: paramField2
-            placeholderText: "Enter second parameter"
-            text: logic.parameter2
-            Layout.fillWidth: true
-        }
+    Label {
+        text: "Parameter 1:"
     }
-    RowLayout {
-        Text {
-            text: "Number 1:  "
-            color: "white"
-        }
-        SpinBox {
-            id: numberField1
-            from: 0
-            to: 100
-            value: logic.number1
-            Layout.fillWidth: true
-        }
+    TextField {
+        id: paramField1
+        placeholderText: "Enter first parameter"
+        text: logic.parameter1
+        Layout.fillWidth: true
     }
-
+    Label {
+        text: "Parameter 2:"
+    }
+    TextField {
+        id: paramField2
+        placeholderText: "Enter second parameter"
+        text: logic.parameter2
+        Layout.fillWidth: true
+    }
+    Label {
+        text: "Number 1:"
+    }
+    SpinBox {
+        id: numberField1
+        from: 0
+        to: 100
+        value: logic.number1
+        Layout.fillWidth: true
+    }
     Button {
         text: "Submit"
         width: parent.width
+        Layout.columnSpan: 2
         onClicked: {
             logic.parameter1 = paramField1.text;
             logic.parameter2 = paramField2.text;
