@@ -3,6 +3,10 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 GridLayout {
+
+    property alias latitude: latitudeField.text
+    property alias longitude: longitudeField.text
+
     columns: 2
     Label {
         text: "Hostname:"
@@ -71,7 +75,7 @@ GridLayout {
         text: "Longitude:"
     }
     TextField {
-        id: lonbitudeField
+        id: longitudeField
         text: "9.6271219"
         validator: DoubleValidator {
             bottom: -90.0
@@ -85,8 +89,7 @@ GridLayout {
         width: parent.width
         Layout.columnSpan: 2
         onClicked: {
-            logic.number1 = latitudeField.value;
-            logic.number2 = longitudeField.value;
+            console.log( latitudeField.text + " " + longitudeField.text);
         }
         Layout.fillWidth: true
     }

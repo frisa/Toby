@@ -42,12 +42,13 @@ ApplicationWindow {
         }
     }
     footer: Label{
-        text: "Done"
+        text: "Location: "  + sensorPage.sensorLocation.latitude + ", " + sensorPage.sensorLocation.longitude
     }
     StackView {
         id: stackView
         anchors.fill: parent
         initialItem: Sensor {
+            id: sensorPage
         }
     }
 }
