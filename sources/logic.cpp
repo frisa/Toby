@@ -35,9 +35,9 @@ void Logic::setNumber1(const int &value)
 
 Logic::Logic(QObject *parent)
 {
-    m_parameter1 = "value 1";
-    m_parameter2 = "value 2";
-    m_number1 = 42;
+    m_parameter1 = "GS05 243567";
+    m_parameter2 = "0687B7D4-7C36-4048-8072-B2990BCC7FB4";
+    m_number1 = 10;
 }
 
 //#include "logic.moc"

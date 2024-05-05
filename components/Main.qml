@@ -6,7 +6,7 @@ ApplicationWindow {
     visible: true
     width: 720
     height: 520
-    title: "Toby's App"
+    title: "GS05 Sensor Locator"
     menuBar: MenuBar {
         Menu {
             title: "&File"
