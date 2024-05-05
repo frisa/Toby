@@ -13,7 +13,7 @@ GridLayout {
         Layout.fillWidth: true
     }
     Label {
-        text: "Parameter 1:"
+        text: "Identifier:"
     }
     TextField {
         id: paramField1
@@ -22,7 +22,7 @@ GridLayout {
         Layout.fillWidth: true
     }
     Label {
-        text: "Parameter 2:"
+        text: "Name:"
     }
     TextField {
         id: paramField2
@@ -31,7 +31,7 @@ GridLayout {
         Layout.fillWidth: true
     }
     Label {
-        text: "Number 1:"
+        text: "Satelites:"
     }
     SpinBox {
         id: numberField1

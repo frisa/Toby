@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 set(EXECUTABLE_NAME "toby")
 project(${EXECUTABLE_NAME})
 
-set(CMAKE_PREFIX_PATH "/Users/jan/Qt/6.5.0/macos/lib/cmake/Qt6")
+list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/macos")
 
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Gui)
@@ -32,8 +32,8 @@ target_compile_definitions(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} 
     PRIVATE
-        "~/Qt/6.5.0/macos/lib/QtGui.framework/Headers"
-        "~/Qt/6.5.0/macos/lib/QtQml.framework/Headers"
+        "~/Qt/6.7.0/macos/lib/QtGui.framework/Headers"
+        "~/Qt/6.7.0/macos/lib/QtQml.framework/Headers"
         "./include"
     )
 target_link_libraries(${PROJECT_NAME} 
