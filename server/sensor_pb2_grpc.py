@@ -5,29 +5,15 @@ import sensor_pb2 as sensor__pb2
 
 
 class SensorStub(object):
-    """The greeting service definition.
-    """
-
     def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.SayHello = channel.unary_unary(
-                '/helloworld.Greeter/SayHello',
-                request_serializer=sensor__pb2.HelloRequest.SerializeToString,
-                response_deserializer=sensor__pb2.HelloReply.FromString,
+        self.callSensor = channel.unary_unary(
+                '/gnss.Sensor/callSensor',
+                request_serializer=sensor__pb2.SensorRequest.SerializeToString,
+                response_deserializer=sensor__pb2.SensorReply.FromString,
                 )
 
-
 class SensorServicer(object):
-    """The greeting service definition.
-    """
-
-    def SayHello(self, request, context):
-        """Sends a greeting
-        """
+    def callSensor(self, request, context):
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -35,24 +21,19 @@ class SensorServicer(object):
 
 def add_SensorServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'SayHello': grpc.unary_unary_rpc_method_handler(
-                    servicer.SayHello,
-                    request_deserializer=sensor__pb2.HelloRequest.FromString,
-                    response_serializer=sensor__pb2.HelloReply.SerializeToString,
+            'callSensor': grpc.unary_unary_rpc_method_handler(
+                    servicer.callSensor,
+                    request_deserializer=sensor__pb2.SensorRequest.FromString,
+                    response_serializer=sensor__pb2.SensorReply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'helloworld.Greeter', rpc_method_handlers)
+            'gnss.Sensor', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
-
- # This class is part of an EXPERIMENTAL API.
 class Sensor(object):
-    """The greeting service definition.
-    """
-
     @staticmethod
-    def SayHello(request,
+    def callSensor(request,
             target,
             options=(),
             channel_credentials=None,
@@ -62,8 +43,8 @@ class Sensor(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/helloworld.Greeter/SayHello',
-            sensor__pb2.HelloRequest.SerializeToString,
-            sensor__pb2.HelloReply.FromString,
+        return grpc.experimental.unary_unary(request, target, '/gnss.Sensor/callSensor',
+            sensor__pb2.SensorRequest.SerializeToString,
+            sensor__pb2.SensorReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

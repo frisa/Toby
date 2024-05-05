@@ -6,7 +6,7 @@ import sensor_pb2_grpc
 
 class Sensor(sensor_pb2_grpc.SensorServicer):
     def SayHello(self, request, context):
-        return sensor_pb2.HelloReply(message="Hello, %s!" % request.name)
+        return sensor_pb2.HelloReply(message="Return, %s!" % request.name)
 
 def serve():
     port = "50051"
@@ -14,7 +14,7 @@ def serve():
     sensor_pb2_grpc.add_SensorServicer_to_server(Sensor(), server)
     server.add_insecure_port("[::]:" + port)
     server.start()
-    print("Server started, listening on " + port)
+    print("Sensor started, listening on " + port)
     server.wait_for_termination()
 
 if __name__ == "__main__":
