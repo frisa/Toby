@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/img">
-        <file>world.png</file>
-    </qresource>
-    <qresource prefix="/qml">
-        <file>main.qml</file>
-        <file>form.qml</file>
-    </qresource>
-</RCC>

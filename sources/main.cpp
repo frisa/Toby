@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     app.setApplicationName("PCData Example");
-    app.setWindowIcon(QIcon(":/img/world.png"));
+    app.setWindowIcon(QIcon(":/img/resources/world.png"));
 
     QQmlApplicationEngine engine;
 
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("pcinfo", &pcinfo);
     engine.rootContext()->setContextProperty("logic", &logic);
 
-    const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
+    const QUrl url(QStringLiteral("qrc:/qml/components/Main.qml"));
     engine.load(url);
     return app.exec();
 }

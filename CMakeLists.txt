@@ -15,12 +15,12 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 set(PROJECT_SOURCES
-    src/main.cpp
-    src/logic.cpp
-    inc/logic.h
-    src/pcinfo.cpp
-    inc/pcinfo.h
-    resources/resources.qrc
+    sources/main.cpp
+    sources/logic.cpp
+    sources/pcinfo.cpp
+    include/logic.h
+    include/pcinfo.h
+    resources.qrc
     )
 
 qt_standard_project_setup(REQUIRES 6.5)
@@ -34,7 +34,7 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE
         "~/Qt/6.5.0/macos/lib/QtGui.framework/Headers"
         "~/Qt/6.5.0/macos/lib/QtQml.framework/Headers"
-        "./inc"
+        "./include"
     )
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE 

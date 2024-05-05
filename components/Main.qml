@@ -49,7 +49,7 @@ ApplicationWindow {
         anchors.fill: parent
         initialItem: Loader {
             anchors.fill: parent
-            source: "form.qml"
+            source: "Form.qml"
         }
     }
 }
