@@ -4,7 +4,7 @@ import grpc
 import sensor_pb2 as sensor__pb2
 
 
-class GreeterStub(object):
+class SensorStub(object):
     """The greeting service definition.
     """
 
@@ -21,7 +21,7 @@ class GreeterStub(object):
                 )
 
 
-class GreeterServicer(object):
+class SensorServicer(object):
     """The greeting service definition.
     """
 
@@ -33,7 +33,7 @@ class GreeterServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_GreeterServicer_to_server(servicer, server):
+def add_SensorServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'SayHello': grpc.unary_unary_rpc_method_handler(
                     servicer.SayHello,
@@ -47,7 +47,7 @@ def add_GreeterServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class Greeter(object):
+class Sensor(object):
     """The greeting service definition.
     """
 
