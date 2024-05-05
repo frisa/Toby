@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.15
 ApplicationWindow {
     visible: true
     width: 320
-    height: 500
+    height: 180
     title: "Toby's App"
     ColumnLayout {
         anchors.fill: parent
@@ -69,22 +69,9 @@ ApplicationWindow {
                 logger.log = "Set Paramter 2 " + logic.parameter2;
                 logger.log = "Set Paramter 1: " + logic.parameter1;
                 logger.log = "Set Paramter 2 " + logic.number1;
+                console.log("Set Paramters");
             }
             Layout.fillWidth: true
-        }
-
-        ListView{
-            model: logger
-            delegate: Text {
-                text: messages
-                color: "yellow"
-            }
-        
-        }
-
-        Text {
-            text: logger.log
-            color: "white"
         }
     }
 }
