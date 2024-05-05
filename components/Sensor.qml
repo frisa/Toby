@@ -9,6 +9,7 @@ GridLayout {
     Form{
         anchors.top: parent.top
         anchors.left: parent.left
+        Layout.maximumWidth: 250
     }
 
     Rectangle {
