@@ -4,5 +4,6 @@
     </qresource>
     <qresource prefix="/qml">
         <file>main.qml</file>
+        <file>form.qml</file>
     </qresource>
 </RCC>

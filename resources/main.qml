@@ -36,11 +36,20 @@ ApplicationWindow {
                 text: "Wlan"
             }
             ToolButton{
-                text: "Quit"
+                text: "Exit"
+                onClicked: Qt.quit();
             }
         }
     }
     footer: Label{
         text: "Done"
+    }
+    StackView {
+        id: stackView
+        anchors.fill: parent
+        initialItem: Loader {
+            anchors.fill: parent
+            source: "form.qml"
+        }
     }
 }
