@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.10)
 project(toby)
 
 IF(APPLE)
-    set(CMAKE_PREFIX_PATH "/Users/jan/Qt/6.5.0/macos/lib/cmake/Qt6")
+    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/macos")
 ELSE()
-    set(CMAKE_PREFIX_PATH "/home/frid/Qt/6.6.2/gcc_64")
+    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/gcc_64")
 ENDIF()
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Gui Widgets Core)
