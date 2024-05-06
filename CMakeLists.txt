@@ -2,7 +2,11 @@ cmake_minimum_required(VERSION 3.10)
 set(EXECUTABLE_NAME "toby")
 project(${EXECUTABLE_NAME})
 
-list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/macos")
+IF(APPLE)
+    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/macos")
+ELSE()
+    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/gcc_64")
+ENDIF()
 
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Gui)
