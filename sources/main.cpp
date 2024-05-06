@@ -8,7 +8,7 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    app.setApplicationName("PCData Example");
+    app.setApplicationName("Sensor Monitor");
     app.setWindowIcon(QIcon(":/img/resources/world.png"));
 
     QQmlApplicationEngine engine;

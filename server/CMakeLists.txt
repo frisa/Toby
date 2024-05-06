@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-set(EXECUTABLE_NAME "toby")
+set(EXECUTABLE_NAME "sensor")
 project(${EXECUTABLE_NAME})
 
 IF(APPLE)
@@ -19,11 +19,9 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 set(PROJECT_SOURCES
-    sources/main.cpp
-    sources/logic.cpp
-    sources/pcinfo.cpp
-    include/logic.h
-    include/pcinfo.h
+    main.cpp
+    sensor.cpp
+    sensor.hpp
     resources.qrc
     )
 
@@ -36,8 +34,6 @@ target_compile_definitions(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} 
     PRIVATE
-        #"~/Qt/6.7.0/macos/lib/QtGui.framework/Headers"
-        #"~/Qt/6.7.0/macos/lib/QtQml.framework/Headers"
         "./include"
     )
 target_link_libraries(${PROJECT_NAME} 
