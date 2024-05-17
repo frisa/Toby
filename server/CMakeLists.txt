@@ -48,6 +48,16 @@ add_custom_command(
         "${SENSOR_PROTO}"
       DEPENDS "${SENSOR_PROTO}")
 
+add_library(sensor_grpc_proto
+      ${SENSOR_PROTO_SRC}
+      ${SENSOR_PROTO_HDR}
+      ${SENSOR_GRPC_SRC}
+      ${SENSOR_GRPC_HDR})
+target_link_libraries(sensor_grpc_proto
+      ${_REFLECTION}
+      ${_GRPC_GRPCPP}
+      ${_PROTOBUF_LIBPROTOBUF})
+
 set(PROJECT_SOURCES
     main.cpp
     sensor.cpp
