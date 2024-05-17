@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 set(EXECUTABLE_NAME "sensor")
 set(LIB_GRPC_NAME "sensor_grpc_proto")
+set(LIB_CONF_NAME "sensor_conf_proto")
 project(${EXECUTABLE_NAME})
 
 #gRPC relevant
@@ -31,13 +32,13 @@ set(SENSOR_GRPC_SRC "${GRPC_GENERATED_FILES}/sensor.grpc.pb.cc")
 set(SENSOR_GRPC_HDR "${GRPC_GENERATED_FILES}/sensor.grpc.pb.h")
 
 add_custom_command(
-      OUTPUT "${SENSOR_PROTO_SRC}" "${SENSOR_PROTO_HDR}" "${SENSOR_GRPC_SRC}" "${SENSOR_GRPC_HDR}"
-      COMMAND ${_PROTOBUF_PROTOC}
-      ARGS --grpc_out "${GRPC_GENERATED_FILES}"
-        --cpp_out "${GRPC_GENERATED_FILES}"
-        -I "${SENSOR_PROTO_PATH}"
-        --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
-        "${SENSOR_PROTO}"
+    OUTPUT "${SENSOR_PROTO_SRC}" "${SENSOR_PROTO_HDR}" "${SENSOR_GRPC_SRC}" "${SENSOR_GRPC_HDR}"
+    COMMAND ${_PROTOBUF_PROTOC}
+    ARGS    --grpc_out "${GRPC_GENERATED_FILES}"
+            --cpp_out "${GRPC_GENERATED_FILES}"
+            -I "${SENSOR_PROTO_PATH}"
+            --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
+            "${SENSOR_PROTO}"
       DEPENDS "${SENSOR_PROTO}")
 
 set(GRPC_SOURCES
@@ -58,6 +59,37 @@ target_link_libraries(${LIB_GRPC_NAME}
     PRIVATE
       ${_REFLECTION}
       ${_GRPC_GRPCPP}
+      ${_PROTOBUF_LIBPROTOBUF})
+
+# Configuration for the executable
+get_filename_component(CONF_PROTO "../protos/configuration.proto" ABSOLUTE)
+get_filename_component(CONF_PROTO_PATH "${CONF_PROTO}" PATH)
+set(CONF_GENERATED_FILES "${CMAKE_CURRENT_LIST_DIR}/conf")
+set(CONF_PROTO_SRC "${CONF_GENERATED_FILES}/configuration.pb.cc")
+set(CONF_PROTO_HDR "${CONF_GENERATED_FILES}/configuration.pb.h")
+
+add_custom_command(
+    OUTPUT "${CONF_PROTO_SRC}" "${CONF_PROTO_HDR}"
+    COMMAND ${_PROTOBUF_PROTOC}
+    ARGS    --cpp_out "${CONF_GENERATED_FILES}"
+            -I "${CONF_PROTO_PATH}"
+            "${CONF_PROTO}"
+    DEPENDS "${CONF_PROTO}")
+
+set(CONF_SOURCES
+    ${CONF_PROTO_SRC}
+    ${CONF_PROTO_HDR}
+    )
+
+add_library(${LIB_CONF_NAME} ${CONF_SOURCES})
+
+target_include_directories(${LIB_CONF_NAME} 
+    PRIVATE
+        "${GRPC_INSTALL_DIR_ABS}/include"
+    )
+
+target_link_libraries(${LIB_CONF_NAME}
+    PRIVATE
       ${_PROTOBUF_LIBPROTOBUF})
 
 # Qt relevant
@@ -83,16 +115,18 @@ set(PROJECT_SOURCES
       sensor.cpp
       sensor.hpp
       resources.qrc
-      )
+   )
 qt_standard_project_setup(REQUIRES 6.5)
 qt6_add_executable(${EXECUTABLE_NAME} ${PROJECT_SOURCES})
 target_compile_definitions(${EXECUTABLE_NAME}
-        PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+        PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+    )
 
 target_include_directories(${EXECUTABLE_NAME} 
     PRIVATE
         "./include"
         "${GRPC_GENERATED_FILES}"
+        "${CONF_GENERATED_FILES}"
         "${GRPC_INSTALL_DIR_ABS}/include"
     )
 target_link_directories(${EXECUTABLE_NAME} 
@@ -101,6 +135,7 @@ target_link_directories(${EXECUTABLE_NAME}
 target_link_libraries(${EXECUTABLE_NAME}
     PRIVATE
         ${LIB_GRPC_NAME}
+        ${LIB_CONF_NAME}
         Qt6::Gui   
         Qt6::Quick
     )

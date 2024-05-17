@@ -15,6 +15,8 @@ class Sensor: public QObject
 
     QString getLongitude() const;
     void setLongitude(const QString &value);
+public:
+    Q_INVOKABLE void Send();
 
     Q_PROPERTY(QString ip READ getIp WRITE setIp NOTIFY connectionChanged)
     Q_PROPERTY(QString port READ getPort WRITE setPort NOTIFY connectionChanged)

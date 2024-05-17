@@ -5,12 +5,16 @@
 #include "sensor.hpp"
 #include <iostream>
 #include "sensor.grpc.pb.h"
+#include "configuration.pb.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     app.setApplicationName("Sensor Mockup");
     app.setWindowIcon(QIcon(":/img/sensor.png"));
+
+    //SensorConfiguration config;
+    //config.set_name("GNSS01");
 
     QQmlApplicationEngine engine;
     Sensor sensor;

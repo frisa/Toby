@@ -64,6 +64,7 @@ ApplicationWindow{
                 console.log("Sensor Port: " + sensor.port);
                 console.log("Sensor Latitude: " + sensor.Latitude);
                 console.log("Sensor Longitude: " + sensor.Longitude);
+                sensor.Send();
             }
             Layout.fillWidth: true
         }

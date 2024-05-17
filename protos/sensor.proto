@@ -6,9 +6,10 @@ service Sensor {
 }
 
 message SensorRequest {
-  string name = 1;
+  string command = 1;
 }
 
 message SensorReply {
-  string message = 1;
+  int32 latitude = 1;
+  int32 longitude = 2;
 }

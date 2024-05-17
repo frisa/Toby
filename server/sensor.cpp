@@ -44,6 +44,11 @@ void Sensor::setLongitude(const QString &value)
     emit connectionChanged();
 }
 
+Q_INVOKABLE void Sensor::Send()
+{
+    emit connectionChanged();
+}
+
 Sensor::Sensor(QObject *parent)
 {
     m_ip = "192.168.0.1";

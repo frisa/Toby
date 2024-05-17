@@ -25,7 +25,7 @@ namespace sensor {
 
 inline constexpr SensorRequest::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : name_(
+      : command_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
         _cached_size_{0} {}
@@ -46,9 +46,8 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr SensorReply::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : message_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
+      : latitude_{0},
+        longitude_{0},
         _cached_size_{0} {}
 
 template <typename>
@@ -81,7 +80,7 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::sensor::SensorRequest, _impl_.name_),
+        PROTOBUF_FIELD_OFFSET(::sensor::SensorRequest, _impl_.command_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::sensor::SensorReply, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -90,7 +89,8 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::sensor::SensorReply, _impl_.message_),
+        PROTOBUF_FIELD_OFFSET(::sensor::SensorReply, _impl_.latitude_),
+        PROTOBUF_FIELD_OFFSET(::sensor::SensorReply, _impl_.longitude_),
 };
 
 static const ::_pbi::MigrationSchema
@@ -104,17 +104,17 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 const char descriptor_table_protodef_sensor_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\014sensor.proto\022\006sensor\"\035\n\rSensorRequest\022"
-    "\014\n\004name\030\001 \001(\t\"\036\n\013SensorReply\022\017\n\007message\030"
-    "\001 \001(\t2D\n\006Sensor\022:\n\ncallSensor\022\025.sensor.S"
-    "ensorRequest\032\023.sensor.SensorReply\"\000b\006pro"
-    "to3"
+    "\n\014sensor.proto\022\006sensor\" \n\rSensorRequest\022"
+    "\017\n\007command\030\001 \001(\t\"2\n\013SensorReply\022\020\n\010latit"
+    "ude\030\001 \001(\005\022\021\n\tlongitude\030\002 \001(\0052D\n\006Sensor\022:"
+    "\n\ncallSensor\022\025.sensor.SensorRequest\032\023.se"
+    "nsor.SensorReply\"\000b\006proto3"
 };
 static ::absl::once_flag descriptor_table_sensor_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_sensor_2eproto = {
     false,
     false,
-    163,
+    186,
     descriptor_table_protodef_sensor_2eproto,
     "sensor.proto",
     &descriptor_table_sensor_2eproto_once,
@@ -158,7 +158,7 @@ SensorRequest::SensorRequest(::google::protobuf::Arena* arena)
 inline PROTOBUF_NDEBUG_INLINE SensorRequest::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
     const Impl_& from)
-      : name_(arena, from.name_),
+      : command_(arena, from.command_),
         _cached_size_{0} {}
 
 SensorRequest::SensorRequest(
@@ -176,7 +176,7 @@ SensorRequest::SensorRequest(
 inline PROTOBUF_NDEBUG_INLINE SensorRequest::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : name_(arena),
+      : command_(arena),
         _cached_size_{0} {}
 
 inline void SensorRequest::SharedCtor(::_pb::Arena* arena) {
@@ -189,7 +189,7 @@ SensorRequest::~SensorRequest() {
 }
 inline void SensorRequest::SharedDtor() {
   ABSL_DCHECK(GetArena() == nullptr);
-  _impl_.name_.Destroy();
+  _impl_.command_.Destroy();
   _impl_.~Impl_();
 }
 
@@ -214,7 +214,7 @@ PROTOBUF_NOINLINE void SensorRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.name_.ClearToEmpty();
+  _impl_.command_.ClearToEmpty();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -226,7 +226,7 @@ const char* SensorRequest::_InternalParse(
 
 
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 33, 2> SensorRequest::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 36, 2> SensorRequest::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -243,21 +243,21 @@ const ::_pbi::TcParseTable<0, 1, 0, 33, 2> SensorRequest::_table_ = {
     ::_pbi::TcParser::GetTable<::sensor::SensorRequest>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // string name = 1;
+    // string command = 1;
     {::_pbi::TcParser::FastUS1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(SensorRequest, _impl_.name_)}},
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(SensorRequest, _impl_.command_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // string name = 1;
-    {PROTOBUF_FIELD_OFFSET(SensorRequest, _impl_.name_), 0, 0,
+    // string command = 1;
+    {PROTOBUF_FIELD_OFFSET(SensorRequest, _impl_.command_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
   }},
   // no aux_entries
   {{
-    "\24\4\0\0\0\0\0\0"
+    "\24\7\0\0\0\0\0\0"
     "sensor.SensorRequest"
-    "name"
+    "command"
   }},
 };
 
@@ -268,11 +268,11 @@ const ::_pbi::TcParseTable<0, 1, 0, 33, 2> SensorRequest::_table_ = {
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
-  // string name = 1;
-  if (!this->_internal_name().empty()) {
-    const std::string& _s = this->_internal_name();
+  // string command = 1;
+  if (!this->_internal_command().empty()) {
+    const std::string& _s = this->_internal_command();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "sensor.SensorRequest.name");
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "sensor.SensorRequest.command");
     target = stream->WriteStringMaybeAliased(1, _s, target);
   }
 
@@ -293,10 +293,10 @@ const ::_pbi::TcParseTable<0, 1, 0, 33, 2> SensorRequest::_table_ = {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string name = 1;
-  if (!this->_internal_name().empty()) {
+  // string command = 1;
+  if (!this->_internal_command().empty()) {
     total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                    this->_internal_name());
+                                    this->_internal_command());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -311,8 +311,8 @@ void SensorRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::g
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_name().empty()) {
-    _this->_internal_set_name(from._internal_name());
+  if (!from._internal_command().empty()) {
+    _this->_internal_set_command(from._internal_command());
   }
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -333,7 +333,7 @@ void SensorRequest::InternalSwap(SensorRequest* PROTOBUF_RESTRICT other) {
   auto* arena = GetArena();
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.name_, &other->_impl_.name_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.command_, &other->_impl_.command_, arena);
 }
 
 ::google::protobuf::Metadata SensorRequest::GetMetadata() const {
@@ -352,32 +352,24 @@ SensorReply::SensorReply(::google::protobuf::Arena* arena)
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:sensor.SensorReply)
 }
-inline PROTOBUF_NDEBUG_INLINE SensorReply::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from)
-      : message_(arena, from.message_),
-        _cached_size_{0} {}
-
 SensorReply::SensorReply(
-    ::google::protobuf::Arena* arena,
-    const SensorReply& from)
-    : ::google::protobuf::Message(arena) {
-  SensorReply* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_);
-
-  // @@protoc_insertion_point(copy_constructor:sensor.SensorReply)
+    ::google::protobuf::Arena* arena, const SensorReply& from)
+    : SensorReply(arena) {
+  MergeFrom(from);
 }
 inline PROTOBUF_NDEBUG_INLINE SensorReply::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : message_(arena),
-        _cached_size_{0} {}
+      : _cached_size_{0} {}
 
 inline void SensorReply::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, latitude_),
+           0,
+           offsetof(Impl_, longitude_) -
+               offsetof(Impl_, latitude_) +
+               sizeof(Impl_::longitude_));
 }
 SensorReply::~SensorReply() {
   // @@protoc_insertion_point(destructor:sensor.SensorReply)
@@ -386,7 +378,6 @@ SensorReply::~SensorReply() {
 }
 inline void SensorReply::SharedDtor() {
   ABSL_DCHECK(GetArena() == nullptr);
-  _impl_.message_.Destroy();
   _impl_.~Impl_();
 }
 
@@ -411,7 +402,9 @@ PROTOBUF_NOINLINE void SensorReply::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.message_.ClearToEmpty();
+  ::memset(&_impl_.latitude_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.longitude_) -
+      reinterpret_cast<char*>(&_impl_.latitude_)) + sizeof(_impl_.longitude_));
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -423,15 +416,15 @@ const char* SensorReply::_InternalParse(
 
 
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 34, 2> SensorReply::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> SensorReply::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
+    2,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     &_SensorReply_default_instance_._instance,
@@ -440,21 +433,24 @@ const ::_pbi::TcParseTable<0, 1, 0, 34, 2> SensorReply::_table_ = {
     ::_pbi::TcParser::GetTable<::sensor::SensorReply>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // string message = 1;
-    {::_pbi::TcParser::FastUS1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(SensorReply, _impl_.message_)}},
+    // int32 longitude = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SensorReply, _impl_.longitude_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(SensorReply, _impl_.longitude_)}},
+    // int32 latitude = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SensorReply, _impl_.latitude_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(SensorReply, _impl_.latitude_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // string message = 1;
-    {PROTOBUF_FIELD_OFFSET(SensorReply, _impl_.message_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 latitude = 1;
+    {PROTOBUF_FIELD_OFFSET(SensorReply, _impl_.latitude_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 longitude = 2;
+    {PROTOBUF_FIELD_OFFSET(SensorReply, _impl_.longitude_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }},
   // no aux_entries
   {{
-    "\22\7\0\0\0\0\0\0"
-    "sensor.SensorReply"
-    "message"
   }},
 };
 
@@ -465,12 +461,18 @@ const ::_pbi::TcParseTable<0, 1, 0, 34, 2> SensorReply::_table_ = {
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
-  // string message = 1;
-  if (!this->_internal_message().empty()) {
-    const std::string& _s = this->_internal_message();
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "sensor.SensorReply.message");
-    target = stream->WriteStringMaybeAliased(1, _s, target);
+  // int32 latitude = 1;
+  if (this->_internal_latitude() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<1>(
+            stream, this->_internal_latitude(), target);
+  }
+
+  // int32 longitude = 2;
+  if (this->_internal_longitude() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<2>(
+            stream, this->_internal_longitude(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -490,10 +492,16 @@ const ::_pbi::TcParseTable<0, 1, 0, 34, 2> SensorReply::_table_ = {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string message = 1;
-  if (!this->_internal_message().empty()) {
-    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                    this->_internal_message());
+  // int32 latitude = 1;
+  if (this->_internal_latitude() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_latitude());
+  }
+
+  // int32 longitude = 2;
+  if (this->_internal_longitude() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_longitude());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -508,8 +516,11 @@ void SensorReply::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goo
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_message().empty()) {
-    _this->_internal_set_message(from._internal_message());
+  if (from._internal_latitude() != 0) {
+    _this->_impl_.latitude_ = from._impl_.latitude_;
+  }
+  if (from._internal_longitude() != 0) {
+    _this->_impl_.longitude_ = from._impl_.longitude_;
   }
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -527,10 +538,13 @@ PROTOBUF_NOINLINE bool SensorReply::IsInitialized() const {
 
 void SensorReply::InternalSwap(SensorReply* PROTOBUF_RESTRICT other) {
   using std::swap;
-  auto* arena = GetArena();
-  ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.message_, &other->_impl_.message_, arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(SensorReply, _impl_.longitude_)
+      + sizeof(SensorReply::_impl_.longitude_)
+      - PROTOBUF_FIELD_OFFSET(SensorReply, _impl_.latitude_)>(
+          reinterpret_cast<char*>(&_impl_.latitude_),
+          reinterpret_cast<char*>(&other->_impl_.latitude_));
 }
 
 ::google::protobuf::Metadata SensorReply::GetMetadata() const {

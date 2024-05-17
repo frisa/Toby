@@ -194,22 +194,22 @@ class SensorRequest final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kNameFieldNumber = 1,
+    kCommandFieldNumber = 1,
   };
-  // string name = 1;
-  void clear_name() ;
-  const std::string& name() const;
+  // string command = 1;
+  void clear_command() ;
+  const std::string& command() const;
   template <typename Arg_ = const std::string&, typename... Args_>
-  void set_name(Arg_&& arg, Args_... args);
-  std::string* mutable_name();
-  PROTOBUF_NODISCARD std::string* release_name();
-  void set_allocated_name(std::string* value);
+  void set_command(Arg_&& arg, Args_... args);
+  std::string* mutable_command();
+  PROTOBUF_NODISCARD std::string* release_command();
+  void set_allocated_command(std::string* value);
 
   private:
-  const std::string& _internal_name() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(
+  const std::string& _internal_command() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_command(
       const std::string& value);
-  std::string* _internal_mutable_name();
+  std::string* _internal_mutable_command();
 
   public:
   // @@protoc_insertion_point(class_scope:sensor.SensorRequest)
@@ -218,7 +218,7 @@ class SensorRequest final : public ::google::protobuf::Message
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
       0, 1, 0,
-      33, 2>
+      36, 2>
       _table_;
   friend class ::google::protobuf::MessageLite;
   friend class ::google::protobuf::Arena;
@@ -233,7 +233,7 @@ class SensorRequest final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena);
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from);
-    ::google::protobuf::internal::ArenaStringPtr name_;
+    ::google::protobuf::internal::ArenaStringPtr command_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -367,22 +367,27 @@ class SensorReply final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kMessageFieldNumber = 1,
+    kLatitudeFieldNumber = 1,
+    kLongitudeFieldNumber = 2,
   };
-  // string message = 1;
-  void clear_message() ;
-  const std::string& message() const;
-  template <typename Arg_ = const std::string&, typename... Args_>
-  void set_message(Arg_&& arg, Args_... args);
-  std::string* mutable_message();
-  PROTOBUF_NODISCARD std::string* release_message();
-  void set_allocated_message(std::string* value);
+  // int32 latitude = 1;
+  void clear_latitude() ;
+  ::int32_t latitude() const;
+  void set_latitude(::int32_t value);
 
   private:
-  const std::string& _internal_message() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_message(
-      const std::string& value);
-  std::string* _internal_mutable_message();
+  ::int32_t _internal_latitude() const;
+  void _internal_set_latitude(::int32_t value);
+
+  public:
+  // int32 longitude = 2;
+  void clear_longitude() ;
+  ::int32_t longitude() const;
+  void set_longitude(::int32_t value);
+
+  private:
+  ::int32_t _internal_longitude() const;
+  void _internal_set_longitude(::int32_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:sensor.SensorReply)
@@ -390,8 +395,8 @@ class SensorReply final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
-      34, 2>
+      1, 2, 0,
+      0, 2>
       _table_;
   friend class ::google::protobuf::MessageLite;
   friend class ::google::protobuf::Arena;
@@ -406,7 +411,8 @@ class SensorReply final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena);
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from);
-    ::google::protobuf::internal::ArenaStringPtr message_;
+    ::int32_t latitude_;
+    ::int32_t longitude_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -430,108 +436,102 @@ class SensorReply final : public ::google::protobuf::Message
 
 // SensorRequest
 
-// string name = 1;
-inline void SensorRequest::clear_name() {
+// string command = 1;
+inline void SensorRequest::clear_command() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.name_.ClearToEmpty();
+  _impl_.command_.ClearToEmpty();
 }
-inline const std::string& SensorRequest::name() const
+inline const std::string& SensorRequest::command() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:sensor.SensorRequest.name)
-  return _internal_name();
+  // @@protoc_insertion_point(field_get:sensor.SensorRequest.command)
+  return _internal_command();
 }
 template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void SensorRequest::set_name(Arg_&& arg,
+inline PROTOBUF_ALWAYS_INLINE void SensorRequest::set_command(Arg_&& arg,
                                                      Args_... args) {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.name_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:sensor.SensorRequest.name)
+  _impl_.command_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:sensor.SensorRequest.command)
 }
-inline std::string* SensorRequest::mutable_name() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:sensor.SensorRequest.name)
+inline std::string* SensorRequest::mutable_command() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_command();
+  // @@protoc_insertion_point(field_mutable:sensor.SensorRequest.command)
   return _s;
 }
-inline const std::string& SensorRequest::_internal_name() const {
+inline const std::string& SensorRequest::_internal_command() const {
   PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
-  return _impl_.name_.Get();
+  return _impl_.command_.Get();
 }
-inline void SensorRequest::_internal_set_name(const std::string& value) {
+inline void SensorRequest::_internal_set_command(const std::string& value) {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.name_.Set(value, GetArena());
+  _impl_.command_.Set(value, GetArena());
 }
-inline std::string* SensorRequest::_internal_mutable_name() {
+inline std::string* SensorRequest::_internal_mutable_command() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  return _impl_.name_.Mutable( GetArena());
+  return _impl_.command_.Mutable( GetArena());
 }
-inline std::string* SensorRequest::release_name() {
+inline std::string* SensorRequest::release_command() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  // @@protoc_insertion_point(field_release:sensor.SensorRequest.name)
-  return _impl_.name_.Release();
+  // @@protoc_insertion_point(field_release:sensor.SensorRequest.command)
+  return _impl_.command_.Release();
 }
-inline void SensorRequest::set_allocated_name(std::string* value) {
+inline void SensorRequest::set_allocated_command(std::string* value) {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.name_.SetAllocated(value, GetArena());
+  _impl_.command_.SetAllocated(value, GetArena());
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        if (_impl_.name_.IsDefault()) {
-          _impl_.name_.Set("", GetArena());
+        if (_impl_.command_.IsDefault()) {
+          _impl_.command_.Set("", GetArena());
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:sensor.SensorRequest.name)
+  // @@protoc_insertion_point(field_set_allocated:sensor.SensorRequest.command)
 }
 
 // -------------------------------------------------------------------
 
 // SensorReply
 
-// string message = 1;
-inline void SensorReply::clear_message() {
+// int32 latitude = 1;
+inline void SensorReply::clear_latitude() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.message_.ClearToEmpty();
+  _impl_.latitude_ = 0;
 }
-inline const std::string& SensorReply::message() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:sensor.SensorReply.message)
-  return _internal_message();
+inline ::int32_t SensorReply::latitude() const {
+  // @@protoc_insertion_point(field_get:sensor.SensorReply.latitude)
+  return _internal_latitude();
 }
-template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void SensorReply::set_message(Arg_&& arg,
-                                                     Args_... args) {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.message_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:sensor.SensorReply.message)
+inline void SensorReply::set_latitude(::int32_t value) {
+  _internal_set_latitude(value);
+  // @@protoc_insertion_point(field_set:sensor.SensorReply.latitude)
 }
-inline std::string* SensorReply::mutable_message() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_message();
-  // @@protoc_insertion_point(field_mutable:sensor.SensorReply.message)
-  return _s;
-}
-inline const std::string& SensorReply::_internal_message() const {
+inline ::int32_t SensorReply::_internal_latitude() const {
   PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
-  return _impl_.message_.Get();
+  return _impl_.latitude_;
 }
-inline void SensorReply::_internal_set_message(const std::string& value) {
+inline void SensorReply::_internal_set_latitude(::int32_t value) {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.message_.Set(value, GetArena());
+  _impl_.latitude_ = value;
 }
-inline std::string* SensorReply::_internal_mutable_message() {
+
+// int32 longitude = 2;
+inline void SensorReply::clear_longitude() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  return _impl_.message_.Mutable( GetArena());
+  _impl_.longitude_ = 0;
 }
-inline std::string* SensorReply::release_message() {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  // @@protoc_insertion_point(field_release:sensor.SensorReply.message)
-  return _impl_.message_.Release();
+inline ::int32_t SensorReply::longitude() const {
+  // @@protoc_insertion_point(field_get:sensor.SensorReply.longitude)
+  return _internal_longitude();
 }
-inline void SensorReply::set_allocated_message(std::string* value) {
+inline void SensorReply::set_longitude(::int32_t value) {
+  _internal_set_longitude(value);
+  // @@protoc_insertion_point(field_set:sensor.SensorReply.longitude)
+}
+inline ::int32_t SensorReply::_internal_longitude() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.longitude_;
+}
+inline void SensorReply::_internal_set_longitude(::int32_t value) {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.message_.SetAllocated(value, GetArena());
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        if (_impl_.message_.IsDefault()) {
-          _impl_.message_.Set("", GetArena());
-        }
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:sensor.SensorReply.message)
+  _impl_.longitude_ = value;
 }
 
 #ifdef __GNUC__
