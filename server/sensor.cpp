@@ -1,5 +1,4 @@
 #include "sensor.hpp"
-#include "sensor.grpc.pb.h"
 
 QString Sensor::getIp() const
 {

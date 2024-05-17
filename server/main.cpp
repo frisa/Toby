@@ -4,6 +4,7 @@
 #include <QIcon>
 #include "sensor.hpp"
 #include <iostream>
+#include "sensor.grpc.pb.h"
 
 int main(int argc, char *argv[])
 {

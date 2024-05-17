@@ -60,6 +60,10 @@ ApplicationWindow{
             onClicked: {
                 sensor.Longitude = longitudeField.text;
                 sensor.Latitude = latitudeField.text;
+                console.log("Sensor IP: " + sensor.ip);
+                console.log("Sensor Port: " + sensor.port);
+                console.log("Sensor Latitude: " + sensor.Latitude);
+                console.log("Sensor Longitude: " + sensor.Longitude);
             }
             Layout.fillWidth: true
         }
