@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include <QIcon>
 #include "sensor.hpp"
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
@@ -13,6 +14,9 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     Sensor sensor;
     engine.rootContext()->setContextProperty("sensor", &sensor);
+    engine.connect(&sensor, &Sensor::connectionChanged, [&engine](){
+        std::cout << "Connection changed" << std::endl;
+    });
 
     const QUrl url(QStringLiteral("qrc:/qml/Sensor.qml"));
     engine.load(url);

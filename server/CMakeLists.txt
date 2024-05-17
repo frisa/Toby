@@ -1,33 +1,25 @@
 cmake_minimum_required(VERSION 3.10)
 set(EXECUTABLE_NAME "sensor")
+set(LIB_GRPC_NAME "sensor_grpc_proto")
 project(${EXECUTABLE_NAME})
 
-IF(APPLE)
-    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/macos")
-ELSE()
-    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/gcc_64")
-    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/gcc_64")
-ENDIF()
-
-find_package(Qt6 REQUIRED COMPONENTS Core)
-find_package(Qt6 REQUIRED COMPONENTS Gui)
-find_package(Qt6 REQUIRED COMPONENTS Quick)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
-
 #gRPC relevant
-set(ABSL_ENABLE_INSTALL ON) # https://github.com/protocolbuffers/protobuf/issues/12185#issuecomment-1594685860
-add_subdirectory("../../grpc" ${CMAKE_CURRENT_BINARY_DIR}/grpc EXCLUDE_FROM_ALL)
-set(_PROTOBUF_LIBPROTOBUF libprotobuf)
-set(_PROTOBUF_PROTOC $<TARGET_FILE:protobuf::protoc>)
+set(GRPC_INSTALL_DIR "~/gRPC")
+get_filename_component(GRPC_INSTALL_DIR_ABS "~/gRPC" ABSOLUTE)
+list(APPEND CMAKE_PREFIX_PATH "${GRPC_INSTALL_DIR}")
+
+find_package(Threads REQUIRED)
+option(protobuf_MODULE_COMPATIBLE TRUE)
+find_package(Protobuf CONFIG REQUIRED)
+find_package(gRPC CONFIG REQUIRED)
+message(STATUS "Using protobuf ${Protobuf_VERSION}")
+message(STATUS "Using gRPC ${gRPC_VERSION}")
+
+set(_PROTOBUF_LIBPROTOBUF "${GRPC_INSTALL_DIR_ABS}/lib/libprotobuf.a")
 set(_REFLECTION grpc++_reflection)
-set(_ORCA_SERVICE grpcpp_orca_service)
+set(_PROTOBUF_PROTOC "${GRPC_INSTALL_DIR_ABS}/bin/protoc")
 set(_GRPC_GRPCPP grpc++)
-set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:grpc_cpp_plugin>)
+set(_GRPC_CPP_PLUGIN_EXECUTABLE "${GRPC_INSTALL_DIR_ABS}/bin/grpc_cpp_plugin")
 
 get_filename_component(SENSOR_PROTO "../protos/sensor.proto" ABSOLUTE)
 get_filename_component(SENSOR_PROTO_PATH "${SENSOR_PROTO}" PATH)
@@ -48,37 +40,67 @@ add_custom_command(
         "${SENSOR_PROTO}"
       DEPENDS "${SENSOR_PROTO}")
 
-add_library(sensor_grpc_proto
-      ${SENSOR_PROTO_SRC}
-      ${SENSOR_PROTO_HDR}
-      ${SENSOR_GRPC_SRC}
-      ${SENSOR_GRPC_HDR})
-target_link_libraries(sensor_grpc_proto
+set(GRPC_SOURCES
+    ${SENSOR_PROTO_SRC}
+    ${SENSOR_PROTO_HDR}
+    ${SENSOR_GRPC_SRC}
+    ${SENSOR_GRPC_HDR}
+      )
+
+add_library(${LIB_GRPC_NAME} ${GRPC_SOURCES})
+
+target_include_directories(${LIB_GRPC_NAME} 
+    PRIVATE
+        "${GRPC_INSTALL_DIR_ABS}/include"
+    )
+
+target_link_libraries(${LIB_GRPC_NAME}
+    PRIVATE
       ${_REFLECTION}
       ${_GRPC_GRPCPP}
       ${_PROTOBUF_LIBPROTOBUF})
 
+# Qt relevant
+IF(APPLE)
+    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/macos")
+ELSE()
+    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/gcc_64")
+    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/gcc_64")
+ENDIF()
+
+find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Gui)
+find_package(Qt6 REQUIRED COMPONENTS Quick)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
 set(PROJECT_SOURCES
-    main.cpp
-    sensor.cpp
-    sensor.hpp
-    resources.qrc
-    )
-
+      main.cpp
+      sensor.cpp
+      sensor.hpp
+      resources.qrc
+      )
 qt_standard_project_setup(REQUIRES 6.5)
-
-qt6_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
-
-target_compile_definitions(${PROJECT_NAME}
+qt6_add_executable(${EXECUTABLE_NAME} ${PROJECT_SOURCES})
+target_compile_definitions(${EXECUTABLE_NAME}
         PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
-target_include_directories(${PROJECT_NAME} 
+target_include_directories(${EXECUTABLE_NAME} 
     PRIVATE
         "./include"
         "${GRPC_GENERATED_FILES}"
+        "${GRPC_INSTALL_DIR_ABS}/include"
     )
-target_link_libraries(${PROJECT_NAME} 
-    PRIVATE 
+target_link_directories(${EXECUTABLE_NAME} 
+    PRIVATE
+        "${GRPC_INSTALL_DIR_ABS}/lib")
+target_link_libraries(${EXECUTABLE_NAME}
+    PRIVATE
+        ${LIB_GRPC_NAME}
         Qt6::Gui   
         Qt6::Quick
     )

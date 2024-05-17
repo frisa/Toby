@@ -58,7 +58,8 @@ ApplicationWindow{
             width: parent.width
             Layout.columnSpan: 2
             onClicked: {
-                console.log( latitudeField.text + " " + longitudeField.text);
+                sensor.Longitude = longitudeField.text;
+                sensor.Latitude = latitudeField.text;
             }
             Layout.fillWidth: true
         }
