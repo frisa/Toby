@@ -49,6 +49,14 @@ Q_INVOKABLE void Sensor::Send()
     emit connectionChanged();
 }
 
+Sensor::Sensor(const QString &ip, const QString &port, const QString &latitude, const QString &longitude, QObject *parent)
+{
+    m_ip = ip;
+    m_port = port;
+    m_latitude = latitude;
+    m_longitude = longitude;
+}
+
 Sensor::Sensor(QObject *parent)
 {
     m_ip = "192.168.0.1";

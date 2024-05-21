@@ -4,6 +4,7 @@
 class Sensor: public QObject
 {
     Q_OBJECT
+public:
     QString getIp() const;
     void setIp(const QString &value);
 
@@ -24,6 +25,7 @@ public:
     Q_PROPERTY(QString longitude READ getLongitude WRITE setLongitude NOTIFY connectionChanged)
 public:
     explicit Sensor(QObject *parent = nullptr);
+    explicit Sensor(const QString &ip, const QString &port, const QString &latitude, const QString &longitude, QObject *parent = nullptr);
 signals:
     void connectionChanged();
 private:

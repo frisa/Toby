@@ -62,6 +62,8 @@ target_link_libraries(${LIB_GRPC_NAME}
       ${_PROTOBUF_LIBPROTOBUF})
 
 # Configuration for the executable
+find_package(utf8_range REQUIRED)
+find_package(absl REQUIRED)
 get_filename_component(CONF_PROTO "../protos/configuration.proto" ABSOLUTE)
 get_filename_component(CONF_PROTO_PATH "${CONF_PROTO}" PATH)
 set(CONF_GENERATED_FILES "${CMAKE_CURRENT_LIST_DIR}/conf")
@@ -88,9 +90,50 @@ target_include_directories(${LIB_CONF_NAME}
         "${GRPC_INSTALL_DIR_ABS}/include"
     )
 
+set(protobuf_ABSL_USED_TARGETS
+    absl::absl_check
+    absl::absl_log
+    absl::algorithm
+    absl::base
+    absl::bind_front
+    absl::bits
+    absl::btree
+    absl::cleanup
+    absl::cord
+    absl::core_headers
+    absl::debugging
+    absl::die_if_null
+    absl::dynamic_annotations
+    absl::flags
+    absl::flat_hash_map
+    absl::flat_hash_set
+    absl::function_ref
+    absl::hash
+    absl::layout
+    absl::log_initialize
+    absl::log_severity
+    absl::memory
+    absl::node_hash_map
+    absl::node_hash_set
+    absl::optional
+    absl::span
+    absl::status
+    absl::statusor
+    absl::strings
+    absl::synchronization
+    absl::time
+    absl::type_traits
+    absl::utility
+    absl::variant
+  )
+
 target_link_libraries(${LIB_CONF_NAME}
     PRIVATE
-      ${_PROTOBUF_LIBPROTOBUF})
+        ${protobuf_ABSL_USED_TARGETS}
+        utf8_range::utf8_validity
+        ${_REFLECTION}
+        ${_GRPC_GRPCPP}
+        ${_PROTOBUF_LIBPROTOBUF})
 
 # Qt relevant
 IF(APPLE)

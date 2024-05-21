@@ -242,9 +242,11 @@ class SensorConfiguration final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kNameFieldNumber = 1,
-    kInitLatitudeFieldNumber = 2,
-    kInitLongitudeFieldNumber = 3,
-    kTypeFieldNumber = 5,
+    kIpFieldNumber = 2,
+    kPortFieldNumber = 3,
+    kInitLatitudeFieldNumber = 4,
+    kInitLongitudeFieldNumber = 5,
+    kTypeFieldNumber = 6,
   };
   // string name = 1;
   void clear_name() ;
@@ -262,7 +264,39 @@ class SensorConfiguration final : public ::google::protobuf::Message
   std::string* _internal_mutable_name();
 
   public:
-  // int32 initLatitude = 2;
+  // string ip = 2;
+  void clear_ip() ;
+  const std::string& ip() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_ip(Arg_&& arg, Args_... args);
+  std::string* mutable_ip();
+  PROTOBUF_NODISCARD std::string* release_ip();
+  void set_allocated_ip(std::string* value);
+
+  private:
+  const std::string& _internal_ip() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_ip(
+      const std::string& value);
+  std::string* _internal_mutable_ip();
+
+  public:
+  // string port = 3;
+  void clear_port() ;
+  const std::string& port() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_port(Arg_&& arg, Args_... args);
+  std::string* mutable_port();
+  PROTOBUF_NODISCARD std::string* release_port();
+  void set_allocated_port(std::string* value);
+
+  private:
+  const std::string& _internal_port() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_port(
+      const std::string& value);
+  std::string* _internal_mutable_port();
+
+  public:
+  // int32 initLatitude = 4;
   void clear_initlatitude() ;
   ::int32_t initlatitude() const;
   void set_initlatitude(::int32_t value);
@@ -272,7 +306,7 @@ class SensorConfiguration final : public ::google::protobuf::Message
   void _internal_set_initlatitude(::int32_t value);
 
   public:
-  // int32 initLongitude = 3;
+  // int32 initLongitude = 5;
   void clear_initlongitude() ;
   ::int32_t initlongitude() const;
   void set_initlongitude(::int32_t value);
@@ -282,7 +316,7 @@ class SensorConfiguration final : public ::google::protobuf::Message
   void _internal_set_initlongitude(::int32_t value);
 
   public:
-  // .SensorConfiguration.DeviceType type = 5;
+  // .SensorConfiguration.DeviceType type = 6;
   void clear_type() ;
   ::SensorConfiguration_DeviceType type() const;
   void set_type(::SensorConfiguration_DeviceType value);
@@ -297,8 +331,8 @@ class SensorConfiguration final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      3, 4, 0,
-      32, 2>
+      3, 6, 0,
+      38, 2>
       _table_;
   friend class ::google::protobuf::MessageLite;
   friend class ::google::protobuf::Arena;
@@ -314,6 +348,8 @@ class SensorConfiguration final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from);
     ::google::protobuf::internal::ArenaStringPtr name_;
+    ::google::protobuf::internal::ArenaStringPtr ip_;
+    ::google::protobuf::internal::ArenaStringPtr port_;
     ::int32_t initlatitude_;
     ::int32_t initlongitude_;
     int type_;
@@ -390,7 +426,107 @@ inline void SensorConfiguration::set_allocated_name(std::string* value) {
   // @@protoc_insertion_point(field_set_allocated:SensorConfiguration.name)
 }
 
-// int32 initLatitude = 2;
+// string ip = 2;
+inline void SensorConfiguration::clear_ip() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.ip_.ClearToEmpty();
+}
+inline const std::string& SensorConfiguration::ip() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:SensorConfiguration.ip)
+  return _internal_ip();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void SensorConfiguration::set_ip(Arg_&& arg,
+                                                     Args_... args) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.ip_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:SensorConfiguration.ip)
+}
+inline std::string* SensorConfiguration::mutable_ip() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_ip();
+  // @@protoc_insertion_point(field_mutable:SensorConfiguration.ip)
+  return _s;
+}
+inline const std::string& SensorConfiguration::_internal_ip() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.ip_.Get();
+}
+inline void SensorConfiguration::_internal_set_ip(const std::string& value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.ip_.Set(value, GetArena());
+}
+inline std::string* SensorConfiguration::_internal_mutable_ip() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  return _impl_.ip_.Mutable( GetArena());
+}
+inline std::string* SensorConfiguration::release_ip() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:SensorConfiguration.ip)
+  return _impl_.ip_.Release();
+}
+inline void SensorConfiguration::set_allocated_ip(std::string* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.ip_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.ip_.IsDefault()) {
+          _impl_.ip_.Set("", GetArena());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:SensorConfiguration.ip)
+}
+
+// string port = 3;
+inline void SensorConfiguration::clear_port() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.port_.ClearToEmpty();
+}
+inline const std::string& SensorConfiguration::port() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:SensorConfiguration.port)
+  return _internal_port();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void SensorConfiguration::set_port(Arg_&& arg,
+                                                     Args_... args) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.port_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:SensorConfiguration.port)
+}
+inline std::string* SensorConfiguration::mutable_port() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_port();
+  // @@protoc_insertion_point(field_mutable:SensorConfiguration.port)
+  return _s;
+}
+inline const std::string& SensorConfiguration::_internal_port() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.port_.Get();
+}
+inline void SensorConfiguration::_internal_set_port(const std::string& value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.port_.Set(value, GetArena());
+}
+inline std::string* SensorConfiguration::_internal_mutable_port() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  return _impl_.port_.Mutable( GetArena());
+}
+inline std::string* SensorConfiguration::release_port() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:SensorConfiguration.port)
+  return _impl_.port_.Release();
+}
+inline void SensorConfiguration::set_allocated_port(std::string* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.port_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.port_.IsDefault()) {
+          _impl_.port_.Set("", GetArena());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:SensorConfiguration.port)
+}
+
+// int32 initLatitude = 4;
 inline void SensorConfiguration::clear_initlatitude() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   _impl_.initlatitude_ = 0;
@@ -412,7 +548,7 @@ inline void SensorConfiguration::_internal_set_initlatitude(::int32_t value) {
   _impl_.initlatitude_ = value;
 }
 
-// int32 initLongitude = 3;
+// int32 initLongitude = 5;
 inline void SensorConfiguration::clear_initlongitude() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   _impl_.initlongitude_ = 0;
@@ -434,7 +570,7 @@ inline void SensorConfiguration::_internal_set_initlongitude(::int32_t value) {
   _impl_.initlongitude_ = value;
 }
 
-// .SensorConfiguration.DeviceType type = 5;
+// .SensorConfiguration.DeviceType type = 6;
 inline void SensorConfiguration::clear_type() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   _impl_.type_ = 0;

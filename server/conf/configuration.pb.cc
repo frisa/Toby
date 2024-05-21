@@ -27,6 +27,12 @@ inline constexpr SensorConfiguration::Impl_::Impl_(
       : name_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
+        ip_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        port_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
         initlatitude_{0},
         initlongitude_{0},
         type_{static_cast< ::SensorConfiguration_DeviceType >(0)},
@@ -61,6 +67,8 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::SensorConfiguration, _impl_.name_),
+        PROTOBUF_FIELD_OFFSET(::SensorConfiguration, _impl_.ip_),
+        PROTOBUF_FIELD_OFFSET(::SensorConfiguration, _impl_.port_),
         PROTOBUF_FIELD_OFFSET(::SensorConfiguration, _impl_.initlatitude_),
         PROTOBUF_FIELD_OFFSET(::SensorConfiguration, _impl_.initlongitude_),
         PROTOBUF_FIELD_OFFSET(::SensorConfiguration, _impl_.type_),
@@ -75,17 +83,18 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 const char descriptor_table_protodef_configuration_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\023configuration.proto\"\243\001\n\023SensorConfigur"
-    "ation\022\014\n\004name\030\001 \001(\t\022\024\n\014initLatitude\030\002 \001("
-    "\005\022\025\n\rinitLongitude\030\003 \001(\005\022-\n\004type\030\005 \001(\0162\037"
-    ".SensorConfiguration.DeviceType\"\"\n\nDevic"
-    "eType\022\t\n\005GNSS0\020\000\022\t\n\005GNSS1\020\001b\006proto3"
+    "\n\023configuration.proto\"\275\001\n\023SensorConfigur"
+    "ation\022\014\n\004name\030\001 \001(\t\022\n\n\002ip\030\002 \001(\t\022\014\n\004port\030"
+    "\003 \001(\t\022\024\n\014initLatitude\030\004 \001(\005\022\025\n\rinitLongi"
+    "tude\030\005 \001(\005\022-\n\004type\030\006 \001(\0162\037.SensorConfigu"
+    "ration.DeviceType\"\"\n\nDeviceType\022\t\n\005GNSS0"
+    "\020\000\022\t\n\005GNSS1\020\001b\006proto3"
 };
 static ::absl::once_flag descriptor_table_configuration_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_configuration_2eproto = {
     false,
     false,
-    195,
+    221,
     descriptor_table_protodef_configuration_2eproto,
     "configuration.proto",
     &descriptor_table_configuration_2eproto_once,
@@ -149,6 +158,8 @@ inline PROTOBUF_NDEBUG_INLINE SensorConfiguration::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
     const Impl_& from)
       : name_(arena, from.name_),
+        ip_(arena, from.ip_),
+        port_(arena, from.port_),
         _cached_size_{0} {}
 
 SensorConfiguration::SensorConfiguration(
@@ -174,6 +185,8 @@ inline PROTOBUF_NDEBUG_INLINE SensorConfiguration::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : name_(arena),
+        ip_(arena),
+        port_(arena),
         _cached_size_{0} {}
 
 inline void SensorConfiguration::SharedCtor(::_pb::Arena* arena) {
@@ -193,6 +206,8 @@ SensorConfiguration::~SensorConfiguration() {
 inline void SensorConfiguration::SharedDtor() {
   ABSL_DCHECK(GetArena() == nullptr);
   _impl_.name_.Destroy();
+  _impl_.ip_.Destroy();
+  _impl_.port_.Destroy();
   _impl_.~Impl_();
 }
 
@@ -218,6 +233,8 @@ PROTOBUF_NOINLINE void SensorConfiguration::Clear() {
   (void) cached_has_bits;
 
   _impl_.name_.ClearToEmpty();
+  _impl_.ip_.ClearToEmpty();
+  _impl_.port_.ClearToEmpty();
   ::memset(&_impl_.initlatitude_, 0, static_cast<::size_t>(
       reinterpret_cast<char*>(&_impl_.type_) -
       reinterpret_cast<char*>(&_impl_.initlatitude_)) + sizeof(_impl_.type_));
@@ -232,15 +249,15 @@ const char* SensorConfiguration::_InternalParse(
 
 
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<3, 4, 0, 32, 2> SensorConfiguration::_table_ = {
+const ::_pbi::TcParseTable<3, 6, 0, 38, 2> SensorConfiguration::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    5, 56,  // max_field_number, fast_idx_mask
+    6, 56,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967272,  // skipmap
+    4294967232,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
+    6,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     &_SensorConfiguration_default_instance_._instance,
@@ -253,17 +270,21 @@ const ::_pbi::TcParseTable<3, 4, 0, 32, 2> SensorConfiguration::_table_ = {
     // string name = 1;
     {::_pbi::TcParser::FastUS1,
      {10, 63, 0, PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.name_)}},
-    // int32 initLatitude = 2;
+    // string ip = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.ip_)}},
+    // string port = 3;
+    {::_pbi::TcParser::FastUS1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.port_)}},
+    // int32 initLatitude = 4;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SensorConfiguration, _impl_.initlatitude_), 63>(),
-     {16, 63, 0, PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.initlatitude_)}},
-    // int32 initLongitude = 3;
+     {32, 63, 0, PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.initlatitude_)}},
+    // int32 initLongitude = 5;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SensorConfiguration, _impl_.initlongitude_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.initlongitude_)}},
-    {::_pbi::TcParser::MiniParse, {}},
-    // .SensorConfiguration.DeviceType type = 5;
+     {40, 63, 0, PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.initlongitude_)}},
+    // .SensorConfiguration.DeviceType type = 6;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SensorConfiguration, _impl_.type_), 63>(),
-     {40, 63, 0, PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.type_)}},
-    {::_pbi::TcParser::MiniParse, {}},
+     {48, 63, 0, PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.type_)}},
     {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     65535, 65535
@@ -271,21 +292,29 @@ const ::_pbi::TcParseTable<3, 4, 0, 32, 2> SensorConfiguration::_table_ = {
     // string name = 1;
     {PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.name_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // int32 initLatitude = 2;
+    // string ip = 2;
+    {PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.ip_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string port = 3;
+    {PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.port_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 initLatitude = 4;
     {PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.initlatitude_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-    // int32 initLongitude = 3;
+    // int32 initLongitude = 5;
     {PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.initlongitude_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-    // .SensorConfiguration.DeviceType type = 5;
+    // .SensorConfiguration.DeviceType type = 6;
     {PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.type_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
   }},
   // no aux_entries
   {{
-    "\23\4\0\0\0\0\0\0"
+    "\23\4\2\4\0\0\0\0"
     "SensorConfiguration"
     "name"
+    "ip"
+    "port"
   }},
 };
 
@@ -304,25 +333,41 @@ const ::_pbi::TcParseTable<3, 4, 0, 32, 2> SensorConfiguration::_table_ = {
     target = stream->WriteStringMaybeAliased(1, _s, target);
   }
 
-  // int32 initLatitude = 2;
+  // string ip = 2;
+  if (!this->_internal_ip().empty()) {
+    const std::string& _s = this->_internal_ip();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "SensorConfiguration.ip");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
+  }
+
+  // string port = 3;
+  if (!this->_internal_port().empty()) {
+    const std::string& _s = this->_internal_port();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "SensorConfiguration.port");
+    target = stream->WriteStringMaybeAliased(3, _s, target);
+  }
+
+  // int32 initLatitude = 4;
   if (this->_internal_initlatitude() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::
-        WriteInt32ToArrayWithField<2>(
+        WriteInt32ToArrayWithField<4>(
             stream, this->_internal_initlatitude(), target);
   }
 
-  // int32 initLongitude = 3;
+  // int32 initLongitude = 5;
   if (this->_internal_initlongitude() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::
-        WriteInt32ToArrayWithField<3>(
+        WriteInt32ToArrayWithField<5>(
             stream, this->_internal_initlongitude(), target);
   }
 
-  // .SensorConfiguration.DeviceType type = 5;
+  // .SensorConfiguration.DeviceType type = 6;
   if (this->_internal_type() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-        5, this->_internal_type(), target);
+        6, this->_internal_type(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -348,19 +393,31 @@ const ::_pbi::TcParseTable<3, 4, 0, 32, 2> SensorConfiguration::_table_ = {
                                     this->_internal_name());
   }
 
-  // int32 initLatitude = 2;
+  // string ip = 2;
+  if (!this->_internal_ip().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_ip());
+  }
+
+  // string port = 3;
+  if (!this->_internal_port().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_port());
+  }
+
+  // int32 initLatitude = 4;
   if (this->_internal_initlatitude() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
         this->_internal_initlatitude());
   }
 
-  // int32 initLongitude = 3;
+  // int32 initLongitude = 5;
   if (this->_internal_initlongitude() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
         this->_internal_initlongitude());
   }
 
-  // .SensorConfiguration.DeviceType type = 5;
+  // .SensorConfiguration.DeviceType type = 6;
   if (this->_internal_type() != 0) {
     total_size += 1 +
                   ::_pbi::WireFormatLite::EnumSize(this->_internal_type());
@@ -380,6 +437,12 @@ void SensorConfiguration::MergeImpl(::google::protobuf::MessageLite& to_msg, con
 
   if (!from._internal_name().empty()) {
     _this->_internal_set_name(from._internal_name());
+  }
+  if (!from._internal_ip().empty()) {
+    _this->_internal_set_ip(from._internal_ip());
+  }
+  if (!from._internal_port().empty()) {
+    _this->_internal_set_port(from._internal_port());
   }
   if (from._internal_initlatitude() != 0) {
     _this->_impl_.initlatitude_ = from._impl_.initlatitude_;
@@ -410,6 +473,8 @@ void SensorConfiguration::InternalSwap(SensorConfiguration* PROTOBUF_RESTRICT ot
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.name_, &other->_impl_.name_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.ip_, &other->_impl_.ip_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.port_, &other->_impl_.port_, arena);
   ::google::protobuf::internal::memswap<
       PROTOBUF_FIELD_OFFSET(SensorConfiguration, _impl_.type_)
       + sizeof(SensorConfiguration::_impl_.type_)
