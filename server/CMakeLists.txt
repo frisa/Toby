@@ -17,9 +17,7 @@ message(STATUS "Using protobuf ${Protobuf_VERSION}")
 message(STATUS "Using gRPC ${gRPC_VERSION}")
 
 set(_PROTOBUF_LIBPROTOBUF "${GRPC_INSTALL_DIR_ABS}/lib/libprotobuf.a")
-set(_REFLECTION grpc++_reflection)
 set(_PROTOBUF_PROTOC "${GRPC_INSTALL_DIR_ABS}/bin/protoc")
-set(_GRPC_GRPCPP grpc++)
 set(_GRPC_CPP_PLUGIN_EXECUTABLE "${GRPC_INSTALL_DIR_ABS}/bin/grpc_cpp_plugin")
 
 get_filename_component(SENSOR_PROTO "../protos/sensor.proto" ABSOLUTE)
@@ -57,9 +55,9 @@ target_include_directories(${LIB_GRPC_NAME}
 
 target_link_libraries(${LIB_GRPC_NAME}
     PRIVATE
-      ${_REFLECTION}
-      gRPC::grpc++
-      protobuf::libprotobuf)
+        grpc++_reflection
+        gRPC::grpc++
+        protobuf::libprotobuf)
 
 # Configuration for the executable
 find_package(utf8_range REQUIRED)
@@ -131,7 +129,8 @@ target_link_libraries(${LIB_CONF_NAME}
     PRIVATE
         ${protobuf_ABSL_USED_TARGETS}
         utf8_range::utf8_validity
-        ${_REFLECTION}
+        grpc++_reflection
+        gRPC::grpc++
         protobuf::libprotobuf
 )
 
@@ -179,8 +178,9 @@ target_link_libraries(${EXECUTABLE_NAME}
     PRIVATE
         ${LIB_GRPC_NAME}
         ${LIB_CONF_NAME}
-        gRPC::grpc++
-        protobuf::libprotobuf
         Qt6::Gui   
         Qt6::Quick
+        grpc++_reflection
+        gRPC::grpc++
+        protobuf::libprotobuf
     )
