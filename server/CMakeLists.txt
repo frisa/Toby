@@ -58,8 +58,8 @@ target_include_directories(${LIB_GRPC_NAME}
 target_link_libraries(${LIB_GRPC_NAME}
     PRIVATE
       ${_REFLECTION}
-      ${_GRPC_GRPCPP}
-      ${_PROTOBUF_LIBPROTOBUF})
+      gRPC::grpc++
+      protobuf::libprotobuf)
 
 # Configuration for the executable
 find_package(utf8_range REQUIRED)
@@ -132,8 +132,8 @@ target_link_libraries(${LIB_CONF_NAME}
         ${protobuf_ABSL_USED_TARGETS}
         utf8_range::utf8_validity
         ${_REFLECTION}
-        ${_GRPC_GRPCPP}
-        ${_PROTOBUF_LIBPROTOBUF})
+        protobuf::libprotobuf
+)
 
 # Qt relevant
 IF(APPLE)
@@ -179,6 +179,8 @@ target_link_libraries(${EXECUTABLE_NAME}
     PRIVATE
         ${LIB_GRPC_NAME}
         ${LIB_CONF_NAME}
+        gRPC::grpc++
+        protobuf::libprotobuf
         Qt6::Gui   
         Qt6::Quick
     )

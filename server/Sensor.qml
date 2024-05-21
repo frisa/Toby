@@ -54,7 +54,7 @@ ApplicationWindow{
             Layout.fillWidth: true
         }
         Button {
-            text: "Send"
+            text: "Listen"
             width: parent.width
             Layout.columnSpan: 2
             onClicked: {

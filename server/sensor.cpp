@@ -1,55 +1,55 @@
 #include "sensor.hpp"
 
-QString Sensor::getIp() const
+QString SensorModel::getIp() const
 {
     return m_ip;
 }
 
-void Sensor::setIp(const QString &value)
+void SensorModel::setIp(const QString &value)
 {
     m_ip = value;
     emit connectionChanged();
 }
 
-QString Sensor::getPort() const
+QString SensorModel::getPort() const
 {
     return m_port;
 }
 
-void Sensor::setPort(const QString &value)
+void SensorModel::setPort(const QString &value)
 {
     m_port = value;
     emit connectionChanged();
 }
 
-QString Sensor::getLatitude() const
+QString SensorModel::getLatitude() const
 {
     return m_latitude;
 }
 
-void Sensor::setLatitude(const QString &value)
+void SensorModel::setLatitude(const QString &value)
 {
     m_latitude = value;
     emit connectionChanged();
 }
 
-QString Sensor::getLongitude() const
+QString SensorModel::getLongitude() const
 {
     return m_longitude;
 }
 
-void Sensor::setLongitude(const QString &value)
+void SensorModel::setLongitude(const QString &value)
 {
     m_longitude = value;
     emit connectionChanged();
 }
 
-Q_INVOKABLE void Sensor::Send()
+Q_INVOKABLE void SensorModel::Send()
 {
     emit connectionChanged();
 }
 
-Sensor::Sensor(const QString &ip, const QString &port, const QString &latitude, const QString &longitude, QObject *parent)
+SensorModel::SensorModel(const QString &ip, const QString &port, const QString &latitude, const QString &longitude, QObject *parent)
 {
     m_ip = ip;
     m_port = port;
@@ -57,7 +57,7 @@ Sensor::Sensor(const QString &ip, const QString &port, const QString &latitude, 
     m_longitude = longitude;
 }
 
-Sensor::Sensor(QObject *parent)
+SensorModel::SensorModel(QObject *parent)
 {
     m_ip = "192.168.0.1";
     m_port = "8080";

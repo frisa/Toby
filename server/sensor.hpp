@@ -1,7 +1,7 @@
 #include <QObject>
 #include <QString>
 
-class Sensor: public QObject
+class SensorModel: public QObject
 {
     Q_OBJECT
 public:
@@ -24,8 +24,8 @@ public:
     Q_PROPERTY(QString latitude READ getLatitude WRITE setLatitude NOTIFY connectionChanged)
     Q_PROPERTY(QString longitude READ getLongitude WRITE setLongitude NOTIFY connectionChanged)
 public:
-    explicit Sensor(QObject *parent = nullptr);
-    explicit Sensor(const QString &ip, const QString &port, const QString &latitude, const QString &longitude, QObject *parent = nullptr);
+    explicit SensorModel(QObject *parent = nullptr);
+    explicit SensorModel(const QString &ip, const QString &port, const QString &latitude, const QString &longitude, QObject *parent = nullptr);
 signals:
     void connectionChanged();
 private:
