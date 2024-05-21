@@ -1,22 +1,21 @@
 cmake_minimum_required(VERSION 3.10)
+
+# Binaries
 set(EXECUTABLE_NAME "sensor")
 set(LIB_GRPC_NAME "sensor_grpc_proto")
 set(LIB_CONF_NAME "sensor_conf_proto")
 project(${EXECUTABLE_NAME})
 
-#gRPC relevant
 set(GRPC_INSTALL_DIR "~/gRPC")
 get_filename_component(GRPC_INSTALL_DIR_ABS "~/gRPC" ABSOLUTE)
 list(APPEND CMAKE_PREFIX_PATH "${GRPC_INSTALL_DIR}")
 
-find_package(Threads REQUIRED)
-option(protobuf_MODULE_COMPATIBLE TRUE)
 find_package(Protobuf CONFIG REQUIRED)
 find_package(gRPC CONFIG REQUIRED)
-message(STATUS "Using protobuf ${Protobuf_VERSION}")
-message(STATUS "Using gRPC ${gRPC_VERSION}")
+find_package(utf8_range REQUIRED)
+find_package(absl REQUIRED)
 
-set(_PROTOBUF_LIBPROTOBUF "${GRPC_INSTALL_DIR_ABS}/lib/libprotobuf.a")
+# gRPC relevant
 set(_PROTOBUF_PROTOC "${GRPC_INSTALL_DIR_ABS}/bin/protoc")
 set(_GRPC_CPP_PLUGIN_EXECUTABLE "${GRPC_INSTALL_DIR_ABS}/bin/grpc_cpp_plugin")
 
@@ -59,9 +58,8 @@ target_link_libraries(${LIB_GRPC_NAME}
         gRPC::grpc++
         protobuf::libprotobuf)
 
-# Configuration for the executable
-find_package(utf8_range REQUIRED)
-find_package(absl REQUIRED)
+# Configuration protobuf relevant
+
 get_filename_component(CONF_PROTO "../protos/configuration.proto" ABSOLUTE)
 get_filename_component(CONF_PROTO_PATH "${CONF_PROTO}" PATH)
 set(CONF_GENERATED_FILES "${CMAKE_CURRENT_LIST_DIR}/conf")
@@ -88,46 +86,9 @@ target_include_directories(${LIB_CONF_NAME}
         "${GRPC_INSTALL_DIR_ABS}/include"
     )
 
-set(protobuf_ABSL_USED_TARGETS
-    absl::absl_check
-    absl::absl_log
-    absl::algorithm
-    absl::base
-    absl::bind_front
-    absl::bits
-    absl::btree
-    absl::cleanup
-    absl::cord
-    absl::core_headers
-    absl::debugging
-    absl::die_if_null
-    absl::dynamic_annotations
-    absl::flags
-    absl::flat_hash_map
-    absl::flat_hash_set
-    absl::function_ref
-    absl::hash
-    absl::layout
-    absl::log_initialize
-    absl::log_severity
-    absl::memory
-    absl::node_hash_map
-    absl::node_hash_set
-    absl::optional
-    absl::span
-    absl::status
-    absl::statusor
-    absl::strings
-    absl::synchronization
-    absl::time
-    absl::type_traits
-    absl::utility
-    absl::variant
-  )
-
 target_link_libraries(${LIB_CONF_NAME}
     PRIVATE
-        ${protobuf_ABSL_USED_TARGETS}
+        absl::base
         utf8_range::utf8_validity
         grpc++_reflection
         gRPC::grpc++
@@ -138,7 +99,6 @@ target_link_libraries(${LIB_CONF_NAME}
 IF(APPLE)
     list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/macos")
 ELSE()
-    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/gcc_64")
     list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/gcc_64")
 ENDIF()
 
