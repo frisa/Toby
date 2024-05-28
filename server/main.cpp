@@ -30,7 +30,7 @@ class SensorServiceImpl final : public Sensor::Service
     return Status::OK;
   }
 };
-/*
+
 void RunServer(uint16_t port) {
   std::string server_address = absl::StrFormat("0.0.0.0:%d", port);
   SensorServiceImpl service;
@@ -45,7 +45,7 @@ void RunServer(uint16_t port) {
   std::cout << "Sensor listening on " << server_address << std::endl;
   server->Wait();
 }
-*/
+
 
 int main(int argc, char *argv[])
 {
