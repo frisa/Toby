@@ -46,7 +46,6 @@ void RunServer(uint16_t port) {
   server->Wait();
 }
 
-
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);

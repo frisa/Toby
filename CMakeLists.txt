@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 set(EXECUTABLE_NAME "toby")
 project(${EXECUTABLE_NAME})
-add_subdirectory(server)
+add_subdirectory(sensor)
 
 # Setup names
 set(EXECUTABLE_NAME "toby")
@@ -57,14 +57,7 @@ set(GRPC_SOURCES
     ${SENSOR_GRPC_SRC}
     ${SENSOR_GRPC_HDR}
       )
-
 add_library(${LIB_GRPC_NAME} ${GRPC_SOURCES})
-
-target_include_directories(${LIB_GRPC_NAME} 
-    PRIVATE
-        "${GRPC_INSTALL_DIR_ABS}/include"
-    )
-
 target_link_libraries(${LIB_GRPC_NAME}
     PRIVATE
         grpc++_reflection
@@ -77,7 +70,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-
 set(PROJECT_SOURCES
     sources/main.cpp
     sources/logic.cpp
@@ -88,19 +80,15 @@ set(PROJECT_SOURCES
     )
 
 qt_standard_project_setup(REQUIRES 6.5)
-
-qt6_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
-
-target_include_directories(${PROJECT_NAME} 
+qt6_add_executable(${EXECUTABLE_NAME} ${PROJECT_SOURCES})
+target_include_directories(${EXECUTABLE_NAME}
     PRIVATE
         "./include"
     )
-
 target_link_directories(${EXECUTABLE_NAME} 
     PRIVATE
         "${GRPC_INSTALL_DIR_ABS}/lib")
-
-target_link_libraries(${PROJECT_NAME} 
+target_link_libraries(${EXECUTABLE_NAME}
     PRIVATE
         ${LIB_GRPC_NAME}
         Qt6::Gui   
