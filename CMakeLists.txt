@@ -36,8 +36,6 @@ target_compile_definitions(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} 
     PRIVATE
-        #"~/Qt/6.7.0/macos/lib/QtGui.framework/Headers"
-        #"~/Qt/6.7.0/macos/lib/QtQml.framework/Headers"
         "./include"
     )
 target_link_libraries(${PROJECT_NAME} 
