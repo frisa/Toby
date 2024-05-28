@@ -3,9 +3,9 @@ set(EXECUTABLE_NAME "toby")
 project(${EXECUTABLE_NAME})
 
 IF(APPLE)
-    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/macos")
+    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.1/macos")
 ELSE()
-    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/gcc_64")
+    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.1/gcc_64")
 ENDIF()
 
 find_package(Qt6 REQUIRED COMPONENTS Core)
