@@ -4,6 +4,7 @@
 #include <QIcon>
 #include "pcinfo.h"
 #include "logic.h"
+#include "sensor.grpc.pb.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,7 +13,6 @@ int main(int argc, char *argv[])
     app.setWindowIcon(QIcon(":/img/resources/world.png"));
 
     QQmlApplicationEngine engine;
-
     PCInfo pcinfo;
     Logic logic;
     engine.rootContext()->setContextProperty("pcinfo", &pcinfo);
