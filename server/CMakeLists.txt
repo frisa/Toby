@@ -6,8 +6,8 @@ set(LIB_GRPC_NAME "sensor_grpc_proto")
 set(LIB_CONF_NAME "sensor_conf_proto")
 project(${EXECUTABLE_NAME})
 
-set(GRPC_INSTALL_DIR "~/gRPC")
-get_filename_component(GRPC_INSTALL_DIR_ABS "~/gRPC" ABSOLUTE)
+set(GRPC_INSTALL_DIR "~/Grpc")
+get_filename_component(GRPC_INSTALL_DIR_ABS "~/Grpc" ABSOLUTE)
 list(APPEND CMAKE_PREFIX_PATH "${GRPC_INSTALL_DIR}")
 
 find_package(Protobuf CONFIG REQUIRED)
@@ -97,9 +97,9 @@ target_link_libraries(${LIB_CONF_NAME}
 
 # Qt relevant
 IF(APPLE)
-    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/macos")
+    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.1/macos")
 ELSE()
-    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/gcc_64")
+    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.1/gcc_64")
 ENDIF()
 
 find_package(Qt6 REQUIRED COMPONENTS Core)
