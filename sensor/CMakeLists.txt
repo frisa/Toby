@@ -50,7 +50,7 @@ target_link_libraries(${LIB_GRPC_NAME}
         protobuf::libprotobuf)
 
 # Configuration protobuf relevant
-get_filename_component(CONF_PROTO "../protos/configuration.proto" ABSOLUTE)
+get_filename_component(CONF_PROTO "${CMAKE_CURRENT_LIST_DIR}/configuration.proto" ABSOLUTE)
 get_filename_component(CONF_PROTO_PATH "${CONF_PROTO}" PATH)
 set(CONF_GENERATED_FILES "${CMAKE_CURRENT_LIST_DIR}/configuration")
 set(CONF_PROTO_SRC "${CONF_GENERATED_FILES}/configuration.pb.cc")
