@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 set(EXECUTABLE_NAME "toby")
-project(${EXECUTABLE_NAME})
-add_subdirectory(sensor)
+project(${EXECUTABLE_NAME} C CXX)
+#add_subdirectory(sensor)
 
 # Setup names
 set(EXECUTABLE_NAME "toby")
 set(LIB_GRPC_NAME "toby_grpc_proto")
-set(LIB_CONF_NAME "toby_conf_proto")
 
 # Setup paths
 set(GRPC_INSTALL_DIR "~/Grpc")
@@ -19,6 +18,7 @@ ELSE()
 ENDIF()
 
 # Find packages
+find_package(Threads REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Gui)
 find_package(Qt6 REQUIRED COMPONENTS Quick)
@@ -26,6 +26,10 @@ find_package(Protobuf REQUIRED)
 find_package(gRPC REQUIRED)
 find_package(utf8_range REQUIRED)
 find_package(absl REQUIRED)
+
+set(_PROTOBUF_LIBPROTOBUF protobuf::libprotobuf)
+set(_REFLECTION gRPC::grpc++_reflection)
+set(_GRPC_GRPCPP gRPC::grpc++)
 
 # Setup gRPC
 set(_PROTOBUF_PROTOC "${GRPC_INSTALL_DIR_ABS}/bin/protoc")
@@ -55,9 +59,11 @@ set(GRPC_SOURCES
 add_library(${LIB_GRPC_NAME} ${GRPC_SOURCES})
 target_link_libraries(${LIB_GRPC_NAME}
     PRIVATE
-        grpc++_reflection
-        gRPC::grpc++
-        protobuf::libprotobuf)
+        absl::check
+        absl::strings
+        ${_REFLECTION}
+        ${_GRPC_GRPCPP}
+        ${_PROTOBUF_LIBPROTOBUF})
 
 # Setup conf proto
 set(CMAKE_CXX_STANDARD 17)
@@ -86,9 +92,19 @@ target_include_directories(${EXECUTABLE_NAME}
 target_link_directories(${EXECUTABLE_NAME} 
     PRIVATE
         "${GRPC_INSTALL_DIR_ABS}/lib")
+
 target_link_libraries(${EXECUTABLE_NAME}
     PRIVATE
         ${LIB_GRPC_NAME}
+        ${_REFLECTION}
+        ${_GRPC_GRPCPP}
+        ${_PROTOBUF_LIBPROTOBUF}
+        absl::check
+        absl::flags
+        absl::flags_parse
+        absl::log
+        utf8_validity
+        Qt6::Core
         Qt6::Gui   
         Qt6::Quick
     )
