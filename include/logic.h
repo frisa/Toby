@@ -19,10 +19,12 @@ class Logic: public QObject
     Q_PROPERTY(int number1 READ getNumber1 WRITE setNumber1 NOTIFY numberChanged1)
 public:
     explicit Logic(QObject *parent = nullptr);
+    Q_INVOKABLE void getSensorDataCmd();
 signals:
     void parameterChanged1();
     void parameterChanged2();
     void numberChanged1();
+    void getSensorData();
 private:
     QString m_parameter1;
     QString m_parameter2;

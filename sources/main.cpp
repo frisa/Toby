@@ -48,18 +48,21 @@ int main(int argc, char *argv[])
     app.setApplicationName("Sensor Monitor");
     app.setWindowIcon(QIcon(":/img/resources/world.png"));
 
-    auto channel = grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials());
-    SensorClient sensor(channel);
-    std::string command("get_position");
-    auto reply = sensor.CallSensor(command);
-    std::cout << "Sensor received: " << reply.first << "," << reply.second << std::endl;
-
     QQmlApplicationEngine engine;
     PCInfo pcinfo;
-    Logic logic;
+    Logic logicModel;
     engine.rootContext()->setContextProperty("pcinfo", &pcinfo);
-    engine.rootContext()->setContextProperty("logic", &logic);
+    engine.rootContext()->setContextProperty("logic", &logicModel);
 
+    auto channel = grpc::CreateChannel("127.0.0.1:50051", grpc::InsecureChannelCredentials());
+    SensorClient sensor(channel);
+    engine.connect(&logicModel, &Logic::getSensorData, [&sensor, &logicModel]()
+        {
+            auto reply = sensor.CallSensor("get_position");
+            //logicModel.setLatitude(reply.first);
+            //logicModel.setLongitude(reply.second);
+            std::cout << "Sensor received: " << reply.first << "," << reply.second << std::endl;
+        });
     const QUrl url(QStringLiteral("qrc:/qml/components/Main.qml"));
     engine.load(url);
     return app.exec();

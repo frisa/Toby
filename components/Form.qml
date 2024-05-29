@@ -90,6 +90,7 @@ GridLayout {
         Layout.columnSpan: 2
         onClicked: {
             console.log( latitudeField.text + " " + longitudeField.text);
+            logic.getSensorDataCmd();
         }
         Layout.fillWidth: true
     }

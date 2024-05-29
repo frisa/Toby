@@ -59,8 +59,8 @@ SensorModel::SensorModel(const QString &ip, const QString &port, const QString &
 
 SensorModel::SensorModel(QObject *parent)
 {
-    m_ip = "192.168.0.1";
-    m_port = "8080";
-    m_latitude = "47.410967";
-    m_longitude = "9.6271219";
+    m_ip = "";
+    m_port = "";
+    m_latitude = "";
+    m_longitude = "";
 }

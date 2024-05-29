@@ -32,7 +32,7 @@ ApplicationWindow{
         }
         TextField {
             id: latitudeField
-            text: "47.410967"
+            text: sensor.latitude
             validator: DoubleValidator {
                 bottom: -90.0
                 top: 90.0
@@ -45,7 +45,7 @@ ApplicationWindow{
         }
         TextField {
             id: longitudeField
-            text: "9.6271219"
+            text: sensor.longitude
             validator: DoubleValidator {
                 bottom: -90.0
                 top: 90.0
@@ -60,10 +60,6 @@ ApplicationWindow{
             onClicked: {
                 sensor.Longitude = longitudeField.text;
                 sensor.Latitude = latitudeField.text;
-                console.log("Sensor IP: " + sensor.ip);
-                console.log("Sensor Port: " + sensor.port);
-                console.log("Sensor Latitude: " + sensor.Latitude);
-                console.log("Sensor Longitude: " + sensor.Longitude);
                 sensor.Send();
             }
             Layout.fillWidth: true

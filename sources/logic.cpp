@@ -40,4 +40,9 @@ Logic::Logic(QObject *parent)
     m_number1 = 10;
 }
 
+void Logic::getSensorDataCmd()
+{
+    emit getSensorData();
+}
+
 //#include "logic.moc"
