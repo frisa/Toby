@@ -59,8 +59,8 @@ int main(int argc, char *argv[])
     engine.connect(&logicModel, &Logic::getSensorData, [&sensor, &logicModel]()
         {
             auto reply = sensor.CallSensor("get_position");
-            //logicModel.setLatitude(reply.first);
-            //logicModel.setLongitude(reply.second);
+            logicModel.setLatitude(reply.first);
+            logicModel.setLongitude(reply.second);
             std::cout << "Sensor received: " << reply.first << "," << reply.second << std::endl;
         });
     const QUrl url(QStringLiteral("qrc:/qml/components/Main.qml"));

@@ -63,7 +63,7 @@ GridLayout {
     }
     TextField {
         id: latitudeField
-        text: "47.410967"
+        text: logic.latitude
         validator: DoubleValidator {
             bottom: -90.0
             top: 90.0
@@ -76,7 +76,7 @@ GridLayout {
     }
     TextField {
         id: longitudeField
-        text: "9.6271219"
+        text: logic.longitude
         validator: DoubleValidator {
             bottom: -90.0
             top: 90.0
