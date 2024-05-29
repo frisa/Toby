@@ -5,12 +5,20 @@ import QtQuick.Layouts 1.15
 ApplicationWindow{
     visible: true 
     width: 200
-    height: 150
+    height: 200
     title: "Sensor"
     GridLayout {
         columns: 2
+        Image {
+            id: image
+            source: "qrc:/img/sensor.png"
+            Layout.columnSpan: 2
+            Layout.preferredWidth: 40
+            Layout.preferredHeight: 40
+            fillMode: Image.PreserveAspectFit
+        }
         Label {
-            text: "IP:"
+            text: "IP2:"
         }
         TextField {
             id: ipField
@@ -63,13 +71,6 @@ ApplicationWindow{
                 sensor.Send();
             }
             Layout.fillWidth: true
-        }
-        Image {
-            id: image
-            source: "qrc:/img/sensor.png"
-            Layout.columnSpan: 2
-            Layout.fillWidth: true
-        }
-        
+        }      
     }
 }
