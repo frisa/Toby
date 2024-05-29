@@ -64,5 +64,12 @@ ApplicationWindow{
             }
             Layout.fillWidth: true
         }
+        Image {
+            id: image
+            source: "qrc:/img/sensor.png"
+            Layout.columnSpan: 2
+            Layout.fillWidth: true
+        }
+        
     }
 }
