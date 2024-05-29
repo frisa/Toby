@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+message SensorConfiguration {
+  string name = 1;
+  string ip = 2;
+  string port = 3;
+  int32 initLatitude = 4;
+  int32 initLongitude = 5;
+  enum DeviceType {
+  	GNSS0 = 0;
+  	GNSS1 = 1;
+  }
+  DeviceType type = 6;
+}

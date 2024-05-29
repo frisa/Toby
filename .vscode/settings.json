@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "qguiapplication": "cpp"
+        "qguiapplication": "cpp",
+        "qqmlapplicationengine": "cpp",
+        "ostream": "cpp"
     }
 }

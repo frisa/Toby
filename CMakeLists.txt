@@ -1,29 +1,110 @@
 cmake_minimum_required(VERSION 3.10)
-project(toby)
+set(EXECUTABLE_NAME "toby")
+project(${EXECUTABLE_NAME} C CXX)
+#add_subdirectory(sensor)
 
+# Setup names
+set(EXECUTABLE_NAME "toby")
+set(LIB_GRPC_NAME "toby_grpc_proto")
+
+# Setup paths
+set(GRPC_INSTALL_DIR "~/Grpc")
+get_filename_component(GRPC_INSTALL_DIR_ABS "~/Grpc" ABSOLUTE)
+list(APPEND CMAKE_PREFIX_PATH "${GRPC_INSTALL_DIR_ABS}")
 IF(APPLE)
-    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/macos")
+    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.1/macos")
 ELSE()
-    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.0/gcc_64")
+    list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.7.1/gcc_64")
 ENDIF()
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Gui Widgets Core)
+# Find packages
+find_package(Threads REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Gui)
+find_package(Qt6 REQUIRED COMPONENTS Quick)
+find_package(Protobuf REQUIRED)
+find_package(gRPC REQUIRED)
+find_package(utf8_range REQUIRED)
+find_package(absl REQUIRED)
 
+set(_PROTOBUF_LIBPROTOBUF protobuf::libprotobuf)
+set(_REFLECTION gRPC::grpc++_reflection)
+set(_GRPC_GRPCPP gRPC::grpc++)
+
+# Setup gRPC
+set(_PROTOBUF_PROTOC "${GRPC_INSTALL_DIR_ABS}/bin/protoc")
+set(_GRPC_CPP_PLUGIN_EXECUTABLE "${GRPC_INSTALL_DIR_ABS}/bin/grpc_cpp_plugin")
+get_filename_component(SENSOR_PROTO "${CMAKE_SOURCE_DIR}/protos/sensor.proto" ABSOLUTE)
+get_filename_component(SENSOR_PROTO_PATH "${SENSOR_PROTO}" PATH)
+set(GRPC_GENERATED_FILES "${CMAKE_CURRENT_LIST_DIR}/generated")
+set(SENSOR_PROTO_SRC "${GRPC_GENERATED_FILES}/sensor.pb.cc")
+set(SENSOR_PROTO_HDR "${GRPC_GENERATED_FILES}/sensor.pb.h")
+set(SENSOR_GRPC_SRC "${GRPC_GENERATED_FILES}/sensor.grpc.pb.cc")
+set(SENSOR_GRPC_HDR "${GRPC_GENERATED_FILES}/sensor.grpc.pb.h")
+add_custom_command(
+    OUTPUT "${SENSOR_PROTO_SRC}" "${SENSOR_PROTO_HDR}" "${SENSOR_GRPC_SRC}" "${SENSOR_GRPC_HDR}"
+    COMMAND ${_PROTOBUF_PROTOC}
+    ARGS    --grpc_out "${GRPC_GENERATED_FILES}"
+            --cpp_out "${GRPC_GENERATED_FILES}"
+            -I "${SENSOR_PROTO_PATH}"
+            --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
+            "${SENSOR_PROTO}"
+      DEPENDS "${SENSOR_PROTO}")
+set(GRPC_SOURCES
+    ${SENSOR_PROTO_SRC}
+    ${SENSOR_PROTO_HDR}
+    ${SENSOR_GRPC_SRC}
+    ${SENSOR_GRPC_HDR}
+      )
+add_library(${LIB_GRPC_NAME} ${GRPC_SOURCES})
+target_link_libraries(${LIB_GRPC_NAME}
+    PRIVATE
+        absl::check
+        absl::strings
+        ${_REFLECTION}
+        ${_GRPC_GRPCPP}
+        ${_PROTOBUF_LIBPROTOBUF})
+
+# Setup conf proto
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
-qt_add_executable(${PROJECT_NAME} ./src/main.cpp)
-qt_standard_project_setup()
-target_include_directories(${PROJECT_NAME} 
-    PRIVATE
-        "~/Qt/6.5.0/macos/lib/QtCore.framework/Headers"
-        "~/Qt/6.5.0/macos/lib/QtQml.framework/Headers"
-        "~/Qt/6.5.0/macos/lib/QtGui.framework/Headers"
-        "~/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers" 
-
+set(PROJECT_SOURCES
+    sources/main.cpp
+    sources/logic.cpp
+    sources/pcinfo.cpp
+    resources.qrc
     )
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Core Qt6::Quick Qt6::Gui Qt6::Widgets)
+set(PROJECT_INCLUDES
+    include/logic.h
+    include/pcinfo.h
+    )
+qt_standard_project_setup(REQUIRES 6.5)
+qt6_add_executable(${EXECUTABLE_NAME} ${PROJECT_SOURCES} ${PROJECT_INCLUDES})
+include_directories(${Protobuf_INCLUDE_DIRS})
+target_include_directories(${EXECUTABLE_NAME}
+    PRIVATE
+        "./include"
+        "${GRPC_GENERATED_FILES}"
+    )
+target_link_directories(${EXECUTABLE_NAME} 
+    PRIVATE
+        "${GRPC_INSTALL_DIR_ABS}/lib")
+
+target_link_libraries(${EXECUTABLE_NAME}
+    PRIVATE
+        ${LIB_GRPC_NAME}
+        ${_REFLECTION}
+        ${_GRPC_GRPCPP}
+        ${_PROTOBUF_LIBPROTOBUF}
+        absl::check
+        absl::flags
+        absl::flags_parse
+        absl::log
+        utf8_validity
+        Qt6::Core
+        Qt6::Gui   
+        Qt6::Quick
+    )

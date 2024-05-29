@@ -1,0 +1,15 @@
+syntax = "proto3";
+package sensor;
+
+service Sensor {
+  rpc callSensor (SensorRequest) returns (SensorReply) {}
+}
+
+message SensorRequest {
+  string command = 1;
+}
+
+message SensorReply {
+  int32 latitude = 1;
+  int32 longitude = 2;
+}
