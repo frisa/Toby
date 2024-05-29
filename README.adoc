@@ -1,5 +1,6 @@
 # Toby
 
 Testing application for the sensor interface
+
 image::application.png[gRPC application for sensor]
 image::MainWindow.png[Appllication main window]
