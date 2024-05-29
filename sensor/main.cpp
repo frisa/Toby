@@ -8,6 +8,8 @@
 #include "configuration.pb.h"
 #include <fstream>
 #include <filesystem>
+#include <thread>
+#include <future>
 
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 #include <grpcpp/grpcpp.h>
@@ -84,16 +86,17 @@ int main(int argc, char *argv[])
     {
         std::cerr << "Failed to parse configuration file." << std::endl;
     }
-
     QQmlApplicationEngine engine;
     SensorModel sensorModel(QString::fromStdString(config.ip()), QString::fromStdString(config.port()), QString::number(config.initlatitude()), QString::number(config.initlongitude()));
     engine.rootContext()->setContextProperty("sensor", &sensorModel);
-    engine.connect(&sensorModel, &SensorModel::connectionChanged, [&engine, &sensorModel]()
-                    {
-                        RunServer(sensorModel.getIp().toStdString(), sensorModel.getPort().toUShort());
-                        std::cout << "Listening on: " << sensorModel.getIp().toStdString() << std::endl; 
-                    });
-
+    std::future<void> serverFuture;
+    engine.connect(&sensorModel, &SensorModel::connectionChanged, [&sensorModel, &serverFuture]()
+                   {  
+                        serverFuture = std::async(std::launch::async, [&sensorModel]()
+                        {
+                            RunServer(sensorModel.getIp().toStdString(), sensorModel.getPort().toUShort());
+                        });
+                   });
     const QUrl url(QStringLiteral("qrc:/qml/Sensor.qml"));
     engine.load(url);
 
