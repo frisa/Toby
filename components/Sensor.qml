@@ -14,14 +14,20 @@ GridLayout {
         Layout.maximumWidth: 250
     }
     Map {
+        id: mapSensor
         plugin: mapPlugin
         center: QtPositioning.coordinate(sensorForm.latitude, sensorForm.longitude)
-        zoomLevel: 14
+        zoomLevel: 7
         Layout.fillHeight: true
         Layout.fillWidth: true
+        activeMapType: mapSensor.supportedMapTypes[mapSensor.supportedMapTypes.length - 1]
     }
     Plugin {
         id: mapPlugin
         name: "osm"
+        PluginParameter {
+            name: "osm.mapping.custom.host"
+            value: "http://tile.openstreetmap.org/"
+        }
     }
 }

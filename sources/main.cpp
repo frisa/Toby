@@ -51,6 +51,8 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     PCInfo pcinfo;
     Logic logicModel;
+    logicModel.setLatitude(47.4);
+    logicModel.setLongitude(9.6056);
     engine.rootContext()->setContextProperty("pcinfo", &pcinfo);
     engine.rootContext()->setContextProperty("logic", &logicModel);
 
